@@ -32,7 +32,7 @@ function RoomForm() {
     return rules.map(rule => {
       return (
         <div key={ rule.id }>
-          <button id={ rule.id } onClick={ (e)=> { removeRule(e.target.id) } }>X</button>
+          <button type='button' id={ rule.id } onClick={ (e)=> { removeRule(e.target.id) } }>X</button>
           <h5>{ rule.rule }</h5>
         </div>
       )
@@ -65,15 +65,15 @@ function RoomForm() {
               onChange={ (e) => { setRule(e.target.value) } }
               onKeyUp={ (e) => { handleEnter(e) } }
             />
-            <button onClick={(e) => { addRule(e) }}>+</button>
+          <button type='button' onClick={(e) => { addRule(e) }}>+</button>
           </label>
           <Link to='/'>
-            <button>
+            <button type='button'>
               Cancel
             </button>
           </Link>
           <Link to='/'>
-            <button>
+            <button type='button'>
               Create Room
             </button>
           </Link>
