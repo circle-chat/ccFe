@@ -13,7 +13,7 @@ function ChatForm() {
               id='message-input'
               type='text'
               placeholder='Type a message here...'
-              value={ message-text }
+              value={ message }
               onChange={(e) => { setMessage(e.target.value) }}
             />
             <button>

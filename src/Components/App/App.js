@@ -3,7 +3,9 @@ import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
 import { Route } from 'react-router-dom';
-import {ReactComponent as ChatLogo} from './assets/message.svg'
+import {ReactComponent as ChatLogo} from './assets/message.svg';
+import ChatContainer from './../ChatContainer/ChatContainer.js'
+
 
 function App() {
   return (
@@ -18,8 +20,11 @@ function App() {
       <Route path='/' exact>
         <JoinForm />
       </Route>
-      <Route path='/create' exact>
+      <Route path='/create'>
         <RoomForm />
+      </Route>
+      <Route path='/chat' exact>
+        <ChatContainer />
       </Route>
     </main>
   );
