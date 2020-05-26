@@ -7,14 +7,22 @@ function RoomForm() {
   const [ roomname, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
-  const roomID = uniqid()
-  // useEffect()
+  const [ roomID, setroomID ] = useState(uniqid())
+
+  const messagesEndRef = React.createRef()
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const addRule = e => {
     e.preventDefault()
-    const formattedRule = {id: uniqid(), rule: potentialRule}
-    handleRules([...rules, formattedRule])
-    setRule('')
+    if (potentialRule) {
+      const formattedRule = {id: uniqid(), rule: potentialRule}
+      handleRules([...rules, formattedRule])
+      setRule('')
+      scrollToBottom()
+    }
   }
 
   const removeRule = ruleID => {
@@ -22,8 +30,7 @@ function RoomForm() {
   }
 
   const handleEnter = (e) => {
-    e.preventDefault()
-    if (e.keycode === 13) {
+    if (e.keyCode === 13) {
       addRule(e)
     }
   }
@@ -31,9 +38,9 @@ function RoomForm() {
   const createRules = () => {
     return rules.map(rule => {
       return (
-        <div key={ rule.id }>
+        <div className='rule' key={ rule.id }>
           <button type='button' id={ rule.id } onClick={ (e)=> { removeRule(e.target.id) } }>X</button>
-          <h5>{ rule.rule }</h5>
+          <h4>{ rule.rule }</h4>
         </div>
       )
     })
@@ -42,43 +49,49 @@ function RoomForm() {
 
 
     return (
-      <section className="RoomForm">
-        <form onSubmit={ (e) => {e.preventDefault()} }>
-          <label htmlFor='room-input'>Roomname:
-            <input
-              id='room-input'
-              type='text'
-              placeholder='Name'
-              value={ roomname }
-              onChange={(e) => { setRoomname(e.target.value) }}
-            />
+      <form onSubmit={ (e) => {e.preventDefault()} } className="RoomForm">
+        <section className='input-container'>
+          <label htmlFor='room-input'>Group:
           </label>
-          <h5>Room Code: { roomID }</h5>
-          <section>
-            {createRules()}
-          </section>
-          <label>
-            <input id='rule-input'
-              type='text'
-              placeholder='Rule'
-              value={ potentialRule }
-              onChange={ (e) => { setRule(e.target.value) } }
-              onKeyUp={ (e) => { handleEnter(e) } }
-            />
-          <button type='button' onClick={(e) => { addRule(e) }}>+</button>
-          </label>
+          <input
+          id='room-input'
+          type='text'
+          placeholder='Name'
+          value={ roomname }
+          onChange={(e) => { setRoomname(e.target.value) }}
+          />
+        </section>
+        <section className='input-container'>
+          <label>Group Code:</label> <h2>{ roomID }</h2>
+        </section>
+        <h3 className='rules-head'>Group Rules</h3>
+        <section className='rules-container'>
+          {createRules()}
+          <div className='empty-space' ref={messagesEndRef} />
+        </section>
+        <section className='rules-input'>
+          <input id='rule-input'
+          type='text'
+          placeholder='Rule'
+          value={ potentialRule }
+          onChange={ (e) => { setRule(e.target.value) } }
+          onKeyUp={ (e) => { handleEnter(e) } }
+          />
+        <button type='button' onClick={(e) => { addRule(e) }}>+</button>
+        </section>
+        <section className='button-box'>
           <Link to='/'>
-            <button type='button'>
-              Cancel
-            </button>
+          <button className='cancel' type='button'>
+          Cancel
+          </button>
           </Link>
           <Link to='/'>
-            <button type='button'>
-              Create Room
-            </button>
+          <button disabled={ !roomname } type='button'>
+          Create Group
+          </button>
           </Link>
-        </form>
-      </section>
+        </section>
+      </form>
     );
 }
 
