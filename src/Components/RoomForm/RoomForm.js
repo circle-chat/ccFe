@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 
 function RoomForm() {
-  const [ roomname, setRoomname ] = useState('')
+  const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
   const [ roomID, setroomID ] = useState(uniqid())
@@ -57,7 +57,7 @@ function RoomForm() {
           id='room-input'
           type='text'
           placeholder='Name'
-          value={ roomname }
+          value={ groupName }
           onChange={(e) => { setRoomname(e.target.value) }}
           />
         </section>
@@ -81,14 +81,14 @@ function RoomForm() {
         </section>
         <section className='button-box'>
           <Link to='/'>
-          <button className='cancel' type='button'>
-          Cancel
-          </button>
+            <button className='cancel' type='button'>
+            Cancel
+            </button>
           </Link>
           <Link to='/'>
-          <button disabled={ !roomname } type='button'>
-          Create Group
-          </button>
+            <button disabled={ !groupName } type='button'>
+            Create Group
+            </button>
           </Link>
         </section>
       </form>
