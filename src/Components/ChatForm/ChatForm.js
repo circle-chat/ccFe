@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ChatForm.css';
 import { Link } from 'react-router-dom';
 
-function JoinForm() {
+function ChatForm() {
   const [ message, setMessage ] = useState('')
 
     return (
