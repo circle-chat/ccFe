@@ -1,0 +1,17 @@
+.JoinForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2%;
+  width: 40%;
+  height: 30%;
+  margin: auto;
+}
+
+.JoinForm input {
+  font-size: 1.5rem;
+}
+
+.JoinForm .button-box {
+  height: 25%;
+}

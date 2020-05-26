@@ -1,0 +1,66 @@
+.RoomForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2%;
+  width: 40%;
+  height: 60%;
+  margin: auto;
+}
+
+.RoomForm input {
+  font-size: 1.5rem;
+}
+
+.RoomForm .button-box {
+  height: 8%;
+}
+
+.rules-input {
+  width: 100%;
+}
+
+.rules-input input {
+  width: 90%;
+}
+
+.rules-input button {
+  width: 10%;
+  font-size: 1.5rem;
+  border: solid #207094;
+  border-radius: 0 5px 5px 0;
+}
+
+.rules-head {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.rule {
+  display: flex;
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 1% 0;
+}
+
+.rule button {
+  width: 25px;
+  height: 25px;
+  border-radius: 90px;
+  border: solid black 1px;
+  margin-right: 1rem;
+}
+
+.rules-container {
+  height: 40%;
+  overflow-y: scroll;
+  background-color: white;
+  border-radius: 20px;
+  padding: 2% 3%;
+}
+
+.empty-space {
+  height: 1.5rem;
+}
