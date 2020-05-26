@@ -8,38 +8,42 @@ function JoinForm() {
 
 
     return (
-      <section className="JoinForm">
-        <form>
-          <label htmlFor='name-input'>Name:
+        <form className="JoinForm">
+          <section className='input-container'>
+            <label htmlFor='name-input'>Name:
+            </label>
             <input
-              id='name-input'
-              type='text'
-              placeholder='Name'
-              value={ nickname }
-              onChange={(e) => { setNickname(e.target.value) }}
+            id='name-input'
+            type='text'
+            placeholder='Name'
+            value={ nickname }
+            onChange={(e) => { setNickname(e.target.value) }}
             />
-          </label>
-          <label htmlFor='code-input'>Room Code:
+          </section>
+          <section className='input-container'>
+            <label htmlFor='code-input'>Group Code:
+            </label>
             <input
-              id='code-input'
-              type='text'
-              placeholder='Room Code'
-              value={ roomCode }
-              onChange={(e) => { setRoomCode(e.target.value) }}
+            id='code-input'
+            type='text'
+            placeholder='Group Code'
+            value={ roomCode }
+            onChange={(e) => { setRoomCode(e.target.value) }}
             />
-          </label>
-          <Link to='/create'>
-            <button>
-              Create Room
-            </button>
-          </Link>
-          <Link to='/chat'>
-            <button>
+          </section>
+          <section className='button-box'>
+            <Link to='/create'>
+              <button>
+              Create Group
+              </button>
+            </Link>
+            <Link to='/chat'>
+              <button disabled={ !(nickname && roomCode) }>
               Chat!
-            </button>
-          </Link>
+              </button>
+            </Link>
+          </section>
         </form>
-      </section>
     );
 }
 
