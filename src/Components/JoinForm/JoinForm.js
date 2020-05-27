@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getCircleCode } from './Actions';
 
-function JoinForm() {
+function JoinForm({ codes }) {
   const [ nickname, setNickname ] = useState('')
   const [ roomCode, setRoomCode ] = useState('')
 
+  const createOptions = () => {
+    return codes.map(code => (<option value={ code }>))
+  }
 
     return (
         <form className="JoinForm">
@@ -25,11 +30,14 @@ function JoinForm() {
             </label>
             <input
             id='code-input'
-            type='text'
+            list='codes'
             placeholder='Group Code'
             value={ roomCode }
             onChange={(e) => { setRoomCode(e.target.value) }}
             />
+          <datalist>
+            {createOptions()}
+          </datalist>
           </section>
           <section className='button-box'>
             <Link to='/create'>
@@ -47,4 +55,9 @@ function JoinForm() {
     );
 }
 
-export default JoinForm;
+const mapStateToProps = state => ({
+    codes: state.codes
+  })
+// const mapDispatchToProps
+
+export default connect(mapStateToProps, null)(JoinForm);
