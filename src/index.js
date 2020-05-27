@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { composeWithDevTools } from 'react-dev-tools-extension';
-import rootReducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from './Reducers';
 
 ReactDOM.render(
   <Router>
