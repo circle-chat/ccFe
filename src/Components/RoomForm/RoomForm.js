@@ -89,7 +89,7 @@ function RoomForm({getCircleCode}) {
         </section>
         <section className='button-box'>
           <Link to='/'>
-            <button className='cancel' type='button'>
+            <button id='cancel' type='button'>
             Cancel
             </button>
           </Link>

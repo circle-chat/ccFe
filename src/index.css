@@ -40,3 +40,9 @@ button:disabled {
   opacity: 0.8;
   cursor: not-allowed;
 }
+
+input {
+  padding: 0 3%;
+  border: 2px #ebeaea solid;
+  border-radius: 10px;
+}
