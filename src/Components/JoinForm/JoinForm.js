@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addNewCode } from './../../Actions';
 
-function JoinForm() {
+function JoinForm({ codes, addNewCode }) {
   const [ nickname, setNickname ] = useState('')
   const [ roomCode, setRoomCode ] = useState('')
 
+  const saveMyCodes = () => {
+    addNewCode(roomCode)
+    if ( !codes.includes(roomCode)) {
+      window.localStorage.setItem('codes', JSON.stringify( [roomCode, ...codes] ))
+    }
+  }
+
+  const createOptions = () => {
+    console.log(codes);
+    return codes.map(code => (<option value={ code }/>))
+  }
 
     return (
         <form className="JoinForm">
@@ -25,11 +38,14 @@ function JoinForm() {
             </label>
             <input
             id='code-input'
-            type='text'
+            list='codes'
             placeholder='Group Code'
             value={ roomCode }
             onChange={(e) => { setRoomCode(e.target.value) }}
             />
+          <datalist id='codes'>
+            {createOptions()}
+          </datalist>
           </section>
           <section className='button-box'>
             <Link to='/create'>
@@ -38,7 +54,10 @@ function JoinForm() {
               </button>
             </Link>
             <Link to='/chat'>
-              <button disabled={ !(nickname && roomCode) }>
+              <button
+                disabled={ !(nickname && roomCode)}
+                onClick={saveMyCodes}
+              >
               Chat!
               </button>
             </Link>
@@ -47,4 +66,12 @@ function JoinForm() {
     );
 }
 
-export default JoinForm;
+const mapStateToProps = state => ({
+  codes: state.codes,
+})
+
+const mapDispatchToProps = dispatch => ({
+  addNewCode: code => dispatch(addNewCode(code))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(JoinForm);
