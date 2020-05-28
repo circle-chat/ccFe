@@ -17,7 +17,7 @@ function JoinForm({ codes, addNewCode }) {
 
   const createOptions = () => {
     console.log(codes);
-    return codes.map(code => (<option value={ code }/>))
+    return codes.map(code => (<option key={code} value={ code }/>))
   }
 
     return (

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { codes } from './codes'
+import { groupCode } from './groupCode'
 
 const rootReducer = combineReducers({
-  codes
+  codes,
+  groupCode
 })
 
 export default rootReducer
