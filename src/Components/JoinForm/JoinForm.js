@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addNewCode } from './../../Actions';
 
-function JoinForm({ codes }) {
+function JoinForm({ codes, addNewCode }) {
   const [ nickname, setNickname ] = useState('')
   const [ roomCode, setRoomCode ] = useState('')
 
   const saveMyCodes = () => {
-    window.localStorage.setItem('codes', JSON.stringify( codes ))
+    addNewCode(roomCode)
+    if ( !codes.includes(roomCode)) {
+      window.localStorage.setItem('codes', JSON.stringify( [roomCode, ...codes] ))
+    }
   }
 
   const createOptions = () => {
@@ -66,4 +70,8 @@ const mapStateToProps = state => ({
   codes: state.codes,
 })
 
-export default connect(mapStateToProps, null)(JoinForm);
+const mapDispatchToProps = dispatch => ({
+  addNewCode: code => dispatch(addNewCode(code))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(JoinForm);
