@@ -2,35 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCircleCode } from './../../Actions/index.js';
 
-
-
-
-function JoinForm({ codes, getMyCode }) {
+function JoinForm({ codes }) {
   const [ nickname, setNickname ] = useState('')
   const [ roomCode, setRoomCode ] = useState('')
-
-  const createOptions = () => {
-    console.log(codes);
-    return codes.map(code => (<option value={ code }/>))
-  }
 
   const saveMyCodes = () => {
     window.localStorage.setItem('codes', JSON.stringify( codes ))
   }
 
-  const storeMyCodes = () => {
-    const codes = JSON.parse(window.localStorage.getItem('codes'))
-    if (codes) {
-      codes.map(code => getMyCode(code))
-    }
+  const createOptions = () => {
+    console.log(codes);
+    return codes.map(code => (<option value={ code }/>))
   }
-
-  useEffect(() => {
-    // storeMyCodes()
-  }, [])
-
 
     return (
         <form className="JoinForm">
@@ -81,8 +65,5 @@ function JoinForm({ codes, getMyCode }) {
 const mapStateToProps = state => ({
   codes: state.codes,
 })
-const mapDispatchToProps = dispatch => ({
-  getMyCode: code => dispatch(getCircleCode(code))
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoinForm);
+export default connect(mapStateToProps, null)(JoinForm);

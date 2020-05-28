@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
 import { Route } from 'react-router-dom';
 import {ReactComponent as ChatLogo} from './assets/message.svg';
-import ChatContainer from './../ChatContainer/ChatContainer.js'
+import { getCircleCode } from './../../Actions/index.js';
+import { connect } from 'react-redux';
 
 
-function App() {
+function App({ getMyCode }) {
+
+    const storeMyCodes = () => {
+      const codes = JSON.parse(window.localStorage.getItem('codes'))
+      if (codes) {
+        codes.map(code => getMyCode(code))
+      }
+    }
+
+    useEffect(() => {
+      storeMyCodes()
+    }, [])
+
   return (
     <main className="App">
       <header>
@@ -30,4 +43,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getMyCode: code => dispatch(getCircleCode(code))
+})
+
+export default connect(null, mapDispatchToProps)(App);
