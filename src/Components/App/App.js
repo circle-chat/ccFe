@@ -4,16 +4,16 @@ import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
 import { Route } from 'react-router-dom';
 import {ReactComponent as ChatLogo} from './assets/message.svg';
-import { getCircleCode } from './../../Actions/index.js';
+import { grabLocalCodes } from './../../Actions/index.js';
 import { connect } from 'react-redux';
 
 
-function App({ getMyCode }) {
+function App({ grabLocalCodes }) {
 
     const storeMyCodes = () => {
       const codes = JSON.parse(window.localStorage.getItem('codes'))
       if (codes) {
-        codes.map(code => getMyCode(code))
+        grabLocalCodes( codes )
       }
     }
 
@@ -44,7 +44,7 @@ function App({ getMyCode }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMyCode: code => dispatch(getCircleCode(code))
+  grabLocalCodes: code => dispatch(grabLocalCodes(code))
 })
 
 export default connect(null, mapDispatchToProps)(App);
