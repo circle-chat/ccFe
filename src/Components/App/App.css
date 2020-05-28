@@ -126,7 +126,6 @@ form label {
 .not-main {
   background-image: url("/assets/back-ground-vec-low-op.svg");
   background-size: 100%;
-  background-position: bottom;
 }
 
 .main-page {
