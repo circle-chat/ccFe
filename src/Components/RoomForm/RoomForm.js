@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './RoomForm.css';
 import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
+import { connect } from 'react-redux';
+import { getCircleCode } from './../../Actions/index.js';
 
-function RoomForm() {
+function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
   const [ roomID, setroomID ] = useState(uniqid())
 
   const messagesEndRef = React.createRef()
+
+  const storeCode = () => {
+    getCircleCode('test')
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -86,7 +92,11 @@ function RoomForm() {
             </button>
           </Link>
           <Link to='/'>
-            <button disabled={ !groupName } type='button'>
+            <button
+              disabled={ !groupName }
+              type='button'
+              onClick={ storeCode }
+            >
             Create Group
             </button>
           </Link>
@@ -95,4 +105,8 @@ function RoomForm() {
     );
 }
 
-export default RoomForm;
+const mapDispatchToProps = dispatch => ({
+  getCircleCode: code => dispatch(getCircleCode(code))
+})
+
+export default connect(null, mapDispatchToProps)(RoomForm);
