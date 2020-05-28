@@ -23,6 +23,7 @@ function ChatContainer() {
 
   return (
     <section className="ChatContainer">
+      <ChatDisplay messages={ messages }/>
       {error && <p>{error}</p>}
       <ChatForm setError={ setError } socket={ socket }/>
     </section>
