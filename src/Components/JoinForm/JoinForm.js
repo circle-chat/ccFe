@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCircleCode } from './Actions';
+import { getCircleCode } from './../../Actions/index.js';
 
-function JoinForm({ codes }) {
+
+
+
+function JoinForm({ codes, getMyCode }) {
   const [ nickname, setNickname ] = useState('')
   const [ roomCode, setRoomCode ] = useState('')
 
   const createOptions = () => {
-    return codes.map(code => (<option value={ code }>))
+    console.log(codes);
+    return codes.map(code => (<option value={ code }/>))
   }
+
+  const saveMyCodes = () => {
+    window.localStorage.setItem('codes', JSON.stringify( codes ))
+  }
+
+  const storeMyCodes = () => {
+    const codes = JSON.parse(window.localStorage.getItem('codes'))
+    if (codes) {
+      codes.map(code => getMyCode(code))
+    }
+  }
+
+  useEffect(() => {
+    // storeMyCodes()
+  }, [])
+
 
     return (
         <form className="JoinForm">
@@ -35,7 +55,7 @@ function JoinForm({ codes }) {
             value={ roomCode }
             onChange={(e) => { setRoomCode(e.target.value) }}
             />
-          <datalist>
+          <datalist id='codes'>
             {createOptions()}
           </datalist>
           </section>
@@ -46,7 +66,10 @@ function JoinForm({ codes }) {
               </button>
             </Link>
             <Link to='/chat'>
-              <button disabled={ !(nickname && roomCode) }>
+              <button
+                disabled={ !(nickname && roomCode)}
+                onClick={saveMyCodes}
+              >
               Chat!
               </button>
             </Link>
@@ -56,8 +79,10 @@ function JoinForm({ codes }) {
 }
 
 const mapStateToProps = state => ({
-    codes: state.codes
-  })
-// const mapDispatchToProps
+  codes: state.codes,
+})
+const mapDispatchToProps = dispatch => ({
+  getMyCode: code => dispatch(getCircleCode(code))
+})
 
-export default connect(mapStateToProps, null)(JoinForm);
+export default connect(mapStateToProps, mapDispatchToProps)(JoinForm);
