@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 
 const endPoint = "http://localhost:5000";  
 
+function ChatContainer({ groupCode, roomCode }) {
+  const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([{text: 'test1', id: 1, senderName: 'John' }, {text: 'test2', id: 2, senderName: 'Allen' }, {text: 'test3', id: 3, senderName: 'Alan' }]);
   const [error, setError] = useState('');
 
