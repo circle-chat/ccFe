@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCode } from './../../Actions';
 
-function JoinForm({ codes, addNewCode }) {
+function JoinForm({ codes, addNewCode, roomCode }) {
   const [ nickname, setNickname ] = useState('')
-  const [ roomCode, setRoomCode ] = useState('')
+  const [ roomCode, setRoomCode ] = useState(roomCode)
 
   const saveMyCodes = () => {
     addNewCode(roomCode)
@@ -16,7 +16,6 @@ function JoinForm({ codes, addNewCode }) {
   }
 
   const createOptions = () => {
-    console.log(codes);
     return codes.map(code => (<option key={code} value={ code }/>))
   }
 
@@ -68,6 +67,7 @@ function JoinForm({ codes, addNewCode }) {
 
 const mapStateToProps = state => ({
   codes: state.codes,
+  roomCode: state.roomCode
 })
 
 const mapDispatchToProps = dispatch => ({

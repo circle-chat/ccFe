@@ -11,7 +11,9 @@ const endPoint = "http://localhost:5000";  
 
 function ChatContainer({ groupCode, roomCode }) {
   const socket = io.connect(`${endPoint}`);
-  const [messages, setMessages] = useState([{text: 'test1', id: 1, senderName: 'John' }, {text: 'test2', id: 2, senderName: 'Allen' }, {text: 'test3', id: 3, senderName: 'Alan' }]);
+  const [messages, setMessages] = useState([]);
+  const [groupDetails, setGroupDetails] = useState({});
+  const [room, setRoom] = useState('');
   const [error, setError] = useState('');
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
 
@@ -28,10 +30,26 @@ function ChatContainer({ groupCode, roomCode }) {
       getMessages(msg); 
       socket.emit('recived', true)
     }); 
-  },[messages.length])
+
+    socket.on("group_joined",function(groupDetails) {  
+      formattedDetails = JSON.parse(groupDetails)
+      setGroupDetails(formattedDetails)
+    }); 
+
+    socket.on("room_joined",function(roomCode) {  
+      setRoom(roomCode)
+    }); 
+
+  },[messages.length, groupDetails])
+
+  const leaveChat = () => {
+    socket.emit('leave', room)
+  }
 
   useLayoutEffect(() => {
     socket.emit('join_group', groupCode)
+
+    return leaveChat
   }, []) 
 
 
