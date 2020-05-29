@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
-import './ChatDisplay.css';
+import './Participant.css';
+import LoadingBalls from './../LoadingBalls/LoadingBalls.js'
 
 function Participant({ waiting, userTwo, group }) {
 
@@ -7,15 +8,20 @@ function Participant({ waiting, userTwo, group }) {
     return (
       <section>
         <h3>{ group }</h3>
-        <h3>{ message }</h3>
+        { message }
         <h3>{ userTwo }</h3>
       </section>
     )
   }
 
-  const waitingMessage = 'Waiting to Connect'
+  const waitingMessage = (
+    <section className='waiting-message'>
+      <h3>Waiting to Connect</h3>
+      <LoadingBalls />
+    </section>
+  )
 
-  const connectedMessage = 'Connected With'
+  const connectedMessage = <h3>Connected With</h3>
 
   return (
     <section className="Participant">
