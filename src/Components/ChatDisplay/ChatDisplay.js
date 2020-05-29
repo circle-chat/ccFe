@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component } from 'react';
 import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
-function ChatDisplay({ messages, connected }) {
+function ChatDisplay({ messages, group, userTwo }) {
 
   const displayMessages = () => {
     return messages.map(message => {
@@ -21,9 +21,9 @@ function ChatDisplay({ messages, connected }) {
 
   return (
     <ul className="ChatDisplay">
-      { !connected && <Participant waiting={ true } /> }
-      { connected && <Participant waiting={ false } /> }
-      { connected && displayMessages() }
+      { !userTwo && <Participant group={ group } waiting={ true } /> }
+      { userTwo && <Participant group={ group } userTwo={ userTwo } waiting={ false } /> }
+      { userTwo && displayMessages() }
 
 
     </ul>
