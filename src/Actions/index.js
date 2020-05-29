@@ -8,6 +8,11 @@ export const addNewCode = code => ({
   code
 })
 
+export const addName = name => ({
+  type: 'ADD_NAME',
+  name
+})
+
 export const addRoomCode = code => ({
   type: 'ADD_ROOM_CODE',
   code

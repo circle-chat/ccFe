@@ -9,11 +9,10 @@ import { Redirect } from 'react-router';
 
 const endPoint = "http://localhost:5000";  
 
-function ChatContainer({ groupCode, roomCode }) {
+function ChatContainer({ groupCode, roomCode, name }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
-  const [groupDetails, setGroupDetails] = useState({});
-  const [room, setRoom] = useState('');
+  const [roomData, setRoomData] = useState('');
   const [error, setError] = useState('');
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
 
@@ -26,28 +25,26 @@ function ChatContainer({ groupCode, roomCode }) {
   };
 
   useEffect(() => {
-    socket.on("message",function(msg) {  
-      getMessages(msg); 
+    socket.on("message",function(msg, fun) {  
+      getMessages(msg);
+      console.log(fun);;
       socket.emit('recived', true)
-    }); 
+    });
+  },[messages.length])
 
-    socket.on("group_joined",function(groupDetails) {  
-      formattedDetails = JSON.parse(groupDetails)
-      setGroupDetails(formattedDetails)
-    }); 
-
-    socket.on("room_joined",function(roomCode) {  
-      setRoom(roomCode)
-    }); 
-
-  },[messages.length, groupDetails])
+  useEffect(() => {
+    socket.on("join_room",function(data) {  
+      setRoomData(data)
+      socket.emit('recived', true)
+    });
+  },[roomData])
 
   const leaveChat = () => {
-    socket.emit('leave', room)
+    socket.emit('leave', roomData)
   }
 
   useLayoutEffect(() => {
-    socket.emit('join_group', groupCode)
+    socket.emit('join_group', {groupCode, name})
 
     return leaveChat
   }, []) 
@@ -65,7 +62,8 @@ function ChatContainer({ groupCode, roomCode }) {
 
 const mapStateToProps = state => ({
   groupCode: state.groupCode,
-  roomCode: state.roomCode
+  roomCode: state.roomCode,
+  name: state.name
 })
 
 

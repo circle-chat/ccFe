@@ -5,6 +5,7 @@ import { render, waitFor, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
 import { addNewCode, addRoomCode } from './../../Actions';
+import uniqid from 'uniqid';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -13,7 +14,10 @@ import rootReducer from '../../reducers';
 
 const testStore = createStore(rootReducer);
 
- let socket = new SocketMock();
+let socket = new SocketMock();
+
+const rules = [{id: uniqid(), rule: 'No Swearing'},{id: uniqid(), rule: 'No Nudity'}, {id: uniqid(), rule: 'Test'}]
+const groupDetails = {description:'test', rules}
 
 
 
@@ -45,10 +49,6 @@ describe("<ChatContainer />", () => {
       expect(message.room).toBe('test-room-code');
      });
 
-    socket.on('join_group', function (groupCode) {
-         expect(groupCode).toBe('test-code');
-     });
-
     fireEvent.change(messageInput, { target: { value: 'Test' } })
     fireEvent.click(messageSend)
 
@@ -78,6 +78,5 @@ describe("<ChatContainer />", () => {
     act(() => {
       socket.emit('message', 'Hello World')
     });
-    debug()
   });
 });
