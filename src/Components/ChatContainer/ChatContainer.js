@@ -33,7 +33,7 @@ function ChatContainer({ groupCode, roomCode }) {
 
   return (
     <section className="ChatContainer">
-
+      <ChatDisplay messages={ messages } />
       {error && <p>{error}</p>}
       <ChatForm roomCode={roomCode} setError={ setError } socket={ socket }/>
     </section>
