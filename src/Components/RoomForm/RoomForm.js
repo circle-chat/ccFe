@@ -5,6 +5,8 @@ import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { getCircleCode } from './../../Actions/index.js';
 
+const endPoint = "http://localhost:5000"
+
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
@@ -13,8 +15,16 @@ function RoomForm({getCircleCode}) {
 
   const messagesEndRef = React.createRef()
 
-  const storeCode = () => {
-    getCircleCode('test')
+  const storeCode = async () => {
+    const response = await fetch(`${endPoint}/groups`, {
+      method: 'POST', 
+      headers: { 
+        'Content-Type': 'application/json' 
+      }, 
+      body: JSON.stringify({ description: groupName, rules })
+    })
+    const data = await response.json()
+    getCircleCode(data.access_code)
   }
 
   const scrollToBottom = () => {

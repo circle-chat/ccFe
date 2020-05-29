@@ -1,0 +1,6 @@
+.waiting-message {
+  display: flex;
+  align-items: flex-end;
+  transform: scale(1);
+  margin: auto;
+}
