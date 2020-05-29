@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './ChatContainer.css';
 import ChatForm from './../ChatForm/ChatForm.js'
+import ChatDisplay from './../ChatDisplay/ChatDisplay.js'
 import io from 'socket.io-client';   
 import { connect } from 'react-redux';
 
