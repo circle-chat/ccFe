@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './ChatContainer.css';
-import { Link } from 'react-router-dom';
 import ChatForm from './../ChatForm/ChatForm.js'
 import io from 'socket.io-client';   
 import { connect } from 'react-redux';
 
 
 const endPoint = "http://localhost:5000";  
-const socket = io.connect(`${endPoint}`);
 
-function ChatContainer({ groupCode }) {
-
+function ChatContainer({ groupCode, roomCode }) {
+  const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
 
-  const getMessages = () => { 
-    socket.on("message", msg => { 
-      setMessages([...messages, msg]); 
-    }); 
+  const getMessages = (msg) => { 
+    setMessages([...messages, msg]); 
   };
 
-  useEffect(() => {  getMessages() }, [messages.length]);
+  useEffect(() => {
+    socket.on("message",function(msg) {  
+      getMessages(msg); 
+      socket.emit('recived', true)
+    }); 
+  },[messages.length])
 
   useLayoutEffect(() => {
     socket.emit('join_group', groupCode)
@@ -31,13 +32,14 @@ function ChatContainer({ groupCode }) {
     <section className="ChatContainer">
 
       {error && <p>{error}</p>}
-      <ChatForm setError={ setError } socket={ socket }/>
+      <ChatForm roomCode={roomCode} setError={ setError } socket={ socket }/>
     </section>
   );
 }
 
 const mapStateToProps = state => ({
   groupCode: state.groupCode,
+  roomCode: state.roomCode
 })
 
 

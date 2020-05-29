@@ -8,6 +8,11 @@ export const addNewCode = code => ({
   code
 })
 
+export const addRoomCode = code => ({
+  type: 'ADD_ROOM_CODE',
+  code
+})
+
 export const grabLocalCodes = codes => ({
   type: 'GRAB_LOCAL_CODES',
   codes

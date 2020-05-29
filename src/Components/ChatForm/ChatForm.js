@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './ChatForm.css';
-import { Link } from 'react-router-dom';
 
-function ChatForm({ socket, setError }) {
+
+function ChatForm({ socket, setError, roomCode }) {
   const [ message, setMessage ] = useState('')
 
   const handleClick = e => {
     e.preventDefault()
     if (message) {
-      socket.emit('message', message)
+      socket.emit('message', {message, room:roomCode})
       setMessage('')
       setError('')
     } else {
