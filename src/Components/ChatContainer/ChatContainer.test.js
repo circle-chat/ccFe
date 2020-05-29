@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { render, waitFor, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
-import { addNewCode, addRoomCode } from './../../Actions';
+import { addNewCode, addRoomCode, addName } from './../../Actions';
 import uniqid from 'uniqid';
 
 import { Provider } from 'react-redux';
@@ -14,7 +14,7 @@ import rootReducer from '../../reducers';
 
 const testStore = createStore(rootReducer);
 
-let socket = new SocketMock();
+let socket
 
 const rules = [{id: uniqid(), rule: 'No Swearing'},{id: uniqid(), rule: 'No Nudity'}, {id: uniqid(), rule: 'Test'}]
 const groupDetails = {description:'test', rules}
@@ -32,9 +32,21 @@ function renderChatContainer() {
 
 testStore.dispatch(addNewCode('test-code'))
 testStore.dispatch(addRoomCode('test-room-code'))
+testStore.dispatch(addName('test-name'))
 
 describe("<ChatContainer />", () => {
   io.connect = jest.fn().mockImplementation(() => socket.socketClient)
+  beforeEach(() => {
+    socket = new SocketMock();
+  })
+
+  it("User can join_group", () => {
+    socket.on('join_group', function (message) {
+
+      expect(message.name).toBe('test-name');
+      expect(message.groupCode).toBe('test-code');
+     });
+  });
 
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText, debug } = renderChatContainer()

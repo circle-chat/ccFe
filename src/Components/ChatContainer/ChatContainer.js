@@ -25,9 +25,8 @@ function ChatContainer({ groupCode, roomCode, name }) {
   };
 
   useEffect(() => {
-    socket.on("message",function(msg, fun) {  
+    socket.on("message",function(msg) {  
       getMessages(msg);
-      console.log(fun);;
       socket.emit('recived', true)
     });
   },[messages.length])
