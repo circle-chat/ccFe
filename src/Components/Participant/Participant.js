@@ -7,7 +7,7 @@ function Participant({ waiting, userTwo, group }) {
   const displayParticipant = ( message ) => {
     return (
       <section>
-        <h3>{ group }</h3>
+        <h3>Circle Code: { group }</h3>
         { message }
         <h3>{ userTwo }</h3>
       </section>

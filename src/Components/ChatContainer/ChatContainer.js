@@ -4,6 +4,7 @@ import ChatForm from './../ChatForm/ChatForm.js'
 import ChatDisplay from './../ChatDisplay/ChatDisplay.js'
 import io from 'socket.io-client';   
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 
 const endPoint = "http://localhost:5000";  
@@ -39,6 +40,7 @@ function ChatContainer({ groupCode, roomCode }) {
       <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
       {error && <p>{ error }</p>}
       { roomDetails.user_two && <ChatForm roomCode={ roomCode } setError={ setError } socket={ socket } /> }
+      { !groupCode && <Redirect to='/' /> } 
     </section>
   );
 }
