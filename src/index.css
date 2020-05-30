@@ -24,11 +24,15 @@ main {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Slabo 27px", sans-serif;
+  font-weight: normal;
+  color: #2d2768;
+  letter-spacing: 0.05rem;
 }
 
 button {
   cursor: pointer;
-  background-color: #207094;
+  background-color: #ebeaea;
   border: 0;
 }
 

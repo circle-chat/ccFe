@@ -1,11 +1,15 @@
 .JoinForm {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 2%;
   width: 40%;
   height: 30%;
   margin: auto;
+  margin-top: 5%;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .JoinForm input {

@@ -11,26 +11,28 @@ import { connect } from 'react-redux';
 
 
 function App({ grabLocalCodes }) {
+  const landing = window.location.pathname === '/' ?
+  'main-page' : 'not-main'
 
-    const storeMyCodes = () => {
-      const codes = JSON.parse(window.localStorage.getItem('codes'))
-      if (codes) {
-        grabLocalCodes( codes )
-      }
+  const storeMyCodes = () => {
+    const codes = JSON.parse(window.localStorage.getItem('codes'))
+    if (codes) {
+      grabLocalCodes( codes )
     }
+  }
 
-    useEffect(() => {
-      storeMyCodes()
-    }, [])
+  useEffect(() => {
+    storeMyCodes()
+  }, [])
 
   return (
     <main className="App">
-      <header>
+      <header className={landing}>
         <div className='logo-box'>
           <ChatLogo />
           <div className='dash-circle'></div>
         </div>
-        <h1>Circle Chat</h1>
+        <h1>The Circle</h1>
       </header>
       <Route path='/' exact>
         <JoinForm />
