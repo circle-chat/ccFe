@@ -9,10 +9,10 @@ function ChatDisplay({ messages, group, userTwo }) {
       return (
         <li key={message.id}>
           <div>
-            {message.senderName}
+            {message.sender_name}
           </div>
           <div>
-            {message.text}
+            {message.message}
           </div>
         </li>
       )
@@ -20,13 +20,11 @@ function ChatDisplay({ messages, group, userTwo }) {
   }
 
   return (
-    <ul className="ChatDisplay">
+    <section className="ChatDisplay">
       { !userTwo && <Participant group={ group } waiting={ true } /> }
       { userTwo && <Participant group={ group } userTwo={ userTwo } waiting={ false } /> }
-      { userTwo && displayMessages() }
-
-
-    </ul>
+      { userTwo && <ul> {displayMessages()} </ul> }
+    </section>
   );
 }
 
