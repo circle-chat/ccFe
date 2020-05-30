@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
@@ -7,12 +7,14 @@ import { Route } from 'react-router-dom';
 import {ReactComponent as ChatLogo} from './assets/message.svg';
 import { grabLocalCodes } from './../../Actions/index.js';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 
 
 function App({ grabLocalCodes }) {
-  const landing = window.location.pathname === '/' ?
-  'main-page' : 'not-main'
+  const [location, setLocation] = useState('main-page')
+  const history = useHistory()
+
 
   const storeMyCodes = () => {
     const codes = JSON.parse(window.localStorage.getItem('codes'))
@@ -21,13 +23,22 @@ function App({ grabLocalCodes }) {
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     storeMyCodes()
-  }, [])
+    let landing = window.location.pathname === '/' ?
+    'main-page' : 'not-main'
+    setLocation(landing)
+  },[])
+
+  history.listen((location) => {
+    let landing = window.location.pathname === '/' ?
+    'main-page' : 'not-main'
+    setLocation(landing)
+  })
 
   return (
-    <main className="App">
-      <header className={landing}>
+    <main className={location + ' App'}>
+      <header>
         <div className='logo-box'>
           <ChatLogo />
           <div className='dash-circle'></div>

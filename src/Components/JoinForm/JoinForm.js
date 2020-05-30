@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ function JoinForm({ codes, addNewCode, room, addName }) {
   }
 
   const createOptions = () => {
-    return codes.map(code => (<option key={code} value={ code }/>))
+    return codes.map(code => (<option key={ code } value={ code }/>))
   }
 
     return (
