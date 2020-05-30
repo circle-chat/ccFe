@@ -1,0 +1,20 @@
+.ChatContainer {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(45, 39, 104, 0.33);
+  border-radius: 20px;
+  padding: 1%;
+  position: relative;
+  width: 95%;
+  height: 85%;
+  margin: auto;
+  margin-top: 2%;
+  backdrop-filter: blur(2px);
+}
+
+.error {
+  color: #fb3640;
+  font-size: 1rem;
+  margin-top: -1.25rem;
+  margin-bottom: 0.25rem;
+  margin-left: 1.5rem;
+}
