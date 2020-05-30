@@ -45,7 +45,7 @@ function ChatContainer({ groupCode, roomCode, name }) {
   return (
     <section className="ChatContainer">
       <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
-      {error && <p>{ error }</p>}
+      {error && <p className='error'>{ error }</p>}
       { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } socket={ socket } /> }
       { !groupCode && <Redirect to='/' /> }
     </section>

@@ -21,7 +21,7 @@ function ChatForm({ socket, setError, roomCode, name }) {
     return (
       <section className="ChatForm">
         <form>
-          <section className="InputContainer">
+          <section className="InputContainer chat-input">
             <input
               id='message-input'
               type='text'

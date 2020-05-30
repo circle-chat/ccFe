@@ -108,15 +108,10 @@ describe("<ChatContainer />", () => {
 
   });
 
-  it("Should be able to recive a message", () => {
+  it("Should show waiting screen if not connected", () => {
     const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    const waitingMessage = getByText('Waiting to Connect')
 
-    socket.on('recived', function (recived) {
-        expect(recived).toBe(true);
-    });
-
-    act(() => {
-      socket.emit('message', 'Hello World')
-    });
+    expect(waitingMessage).toBeInTheDocument()
   });
 });
