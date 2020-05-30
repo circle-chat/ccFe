@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { addNewCode, addName } from './../../Actions';
 
 function JoinForm({ codes, addNewCode, room, addName }) {
-  const [ nickname, setNickname ] = useState('')
+  const [ user, setUser ] = useState('')
   const [ roomCode, setRoomCode ] = useState(room)
 
   const saveMyCodes = () => {
-    addName(nickname)
+    addName(user)
     addNewCode(roomCode)
     if ( !codes.includes(roomCode)) {
       window.localStorage.setItem('codes', JSON.stringify( [roomCode, ...codes] ))
@@ -29,8 +29,8 @@ function JoinForm({ codes, addNewCode, room, addName }) {
             id='name-input'
             type='text'
             placeholder='Name'
-            value={ nickname }
-            onChange={(e) => { setNickname(e.target.value) }}
+            value={ user }
+            onChange={(e) => { setUser(e.target.value) }}
             />
           </section>
           <section className='input-container'>
@@ -55,7 +55,7 @@ function JoinForm({ codes, addNewCode, room, addName }) {
             </Link>
             <Link to='/chat'>
               <button
-                disabled={ !(nickname && roomCode)}
+                disabled={ !(user && roomCode)}
                 onClick={saveMyCodes}
               >
               Chat!
