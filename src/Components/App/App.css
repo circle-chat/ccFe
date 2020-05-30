@@ -10,10 +10,6 @@ font-family: 'Montserrat', sans-serif; */
   align-items: center;
   background-color: #ebeaea;
   flex-direction: column;
-  background-image: url("/assets/back-ground-vec.svg");
-  background-size: 270% 270%;
-  background-origin: border-box;
-  background-position: bottom;
 }
 
 header {
@@ -113,18 +109,30 @@ form label {
   animation: rotate-center 10s linear infinite both;
 }
 
-.not-main {
+.not-main header {
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 }
 
-.not-main .logo-box {
+.not-main header .logo-box {
   margin-right: 10px;
   margin-left: 0;
 }
 
-.not-main h1 {
+.not-main header h1 {
   font-size: 1em;
+}
+
+.not-main {
+  background-image: url("/assets/back-ground-vec-low-op.svg");
+  background-size: 100%;
+  background-position: bottom;
+}
+
+.main-page {
+  background-image: url("/assets/back-ground-vec.svg");
+  background-size: 270% 270%;
+  background-position: bottom;
 }
 
 @-webkit-keyframes rotate-center {
