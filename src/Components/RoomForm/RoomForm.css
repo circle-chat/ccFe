@@ -4,8 +4,11 @@
   justify-content: space-around;
   padding: 2%;
   width: 40%;
-  height: 60%;
+  height: 65%;
   margin: auto;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .RoomForm input {
@@ -27,7 +30,7 @@
 .rules-input button {
   width: 10%;
   font-size: 1.5rem;
-  border: solid #207094;
+  border: 2px solid #ebeaea;
   border-radius: 0 5px 5px 0;
 }
 
@@ -35,7 +38,8 @@
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
-  font-weight: 700;
+  background: white;
+  border-radius: 20px 20px 0 0;
 }
 
 .rule {
@@ -57,10 +61,18 @@
   height: 40%;
   overflow-y: scroll;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 0 0 20px 20px;
   padding: 2% 3%;
 }
 
 .empty-space {
   height: 1.5rem;
+}
+
+.cancel {
+  background-color: #fb3640;
+}
+
+.RoomForm .cancel:hover {
+  transform: scale(1);
 }
