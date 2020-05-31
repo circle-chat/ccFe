@@ -13,7 +13,7 @@ import rootReducer from '../../reducers';
 
 const testStore = createStore(rootReducer);
 
-let socket
+
 
 
 
@@ -33,6 +33,7 @@ testStore.dispatch(addName('test-name'))
 
 describe("<ChatContainer />", () => {
   io.connect = jest.fn().mockImplementation(() => socket.socketClient)
+  let socket
   beforeEach(() => {
     socket = new SocketMock();
   })

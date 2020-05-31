@@ -28,7 +28,9 @@ function App({ grabLocalCodes }) {
   },[])
 
   history.listen((location) => {
-    let landing = window.location.pathname === '/' ?
+    let IsJoin = window.location.pathname === '/'
+    let IsAlsoJoin = window.location.pathname.includes('join')
+    let landing = IsJoin || IsAlsoJoin ?
     'main-page' : 'not-main'
     setLocation(landing)
   })
@@ -45,6 +47,16 @@ function App({ grabLocalCodes }) {
       <Route path='/' exact>
         <JoinForm />
       </Route>
+      <Route
+        path="/join/:groupCode" exact
+        component={({ match }) => {
+            const { params } = match;
+            return (<JoinForm
+              groupCode = {params.groupCode}
+            />)
+          }
+        }
+      />
       <Route path='/create'>
         <RoomForm />
       </Route>

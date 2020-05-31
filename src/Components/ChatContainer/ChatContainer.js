@@ -30,7 +30,7 @@ function ChatContainer({ groupCode, roomCode, name }) {
   useEffect(() => {
     socket.on("join_room",function(data) {  
       setRoomDetails(data)
-      socket.emit('recived', true)
+      socket.emit('received', true)
     });
   },[roomDetails])
 
