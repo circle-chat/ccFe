@@ -14,7 +14,7 @@ import rootReducer from '../../reducers';
 
 const testStore = createStore(rootReducer);
 
-let socket
+
 
 const rules = [{id: uniqid(), rule: 'No Swearing'},{id: uniqid(), rule: 'No Nudity'}, {id: uniqid(), rule: 'Test'}]
 const groupDetails = {description:'test', rules}
@@ -36,6 +36,7 @@ testStore.dispatch(addName('test-name'))
 
 describe("<ChatContainer />", () => {
   io.connect = jest.fn().mockImplementation(() => socket.socketClient)
+  let socket
   beforeEach(() => {
     socket = new SocketMock();
   })
@@ -101,8 +102,8 @@ describe("<ChatContainer />", () => {
     fireEvent.change(messageInput, { target: { value: 'Test' } })
     fireEvent.click(messageSend)
 
-    socket.on('recived', function (recived) {
-        expect(recived).toBe(true);
+    socket.on('received', function (received) {
+        expect(received).toBe(true);
     });
     const message = await waitFor(() => getByText('Test'))
 
