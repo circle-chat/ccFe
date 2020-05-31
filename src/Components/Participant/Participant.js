@@ -1,13 +1,21 @@
 import React, { useState, useEffect, Component } from 'react';
 import './Participant.css';
-import LoadingBalls from './../LoadingBalls/LoadingBalls.js'
+import LoadingBalls from './../LoadingBalls/LoadingBalls.js';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 function Participant({ waiting, userTwo, group }) {
-
+//
   const displayParticipant = ( message ) => {
     return (
       <section>
-        <h3>Circle Code: { group }</h3>
+        <section className='code-section'>
+          <h3>Circle Code: { group }</h3>
+          <CopyToClipboard text={`${window.location.origin}/join/${group}`}>
+            <button id='icon-button' data-tooltip="Copy Invite Link.">
+              <img className='icon' src="assets/clipboard.svg" alt="clipboard" />
+            </button>
+          </CopyToClipboard>
+        </section>
         { message }
         <h3 className='user-two'>{ userTwo }</h3>
       </section>

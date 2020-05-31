@@ -4,17 +4,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCode, addName } from './../../Actions';
 
-function JoinForm({ codes, addNewCode, room, addName }) {
+function JoinForm({ codes, addNewCode, group = '', addName }) {
   const [ user, setUser ] = useState('')
-  const [ roomCode, setRoomCode ] = useState(room)
+  const [ groupCode, setGroupCode ] = useState(group)
 
   const saveMyCodes = () => {
     addName(user)
-    addNewCode(roomCode)
-    if ( !codes.includes(roomCode)) {
-      window.localStorage.setItem('codes', JSON.stringify( [roomCode, ...codes] ))
+    addNewCode(groupCode)
+    if ( !codes.includes(groupCode)) {
+      window.localStorage.setItem('codes', JSON.stringify( [groupCode, ...codes] ))
     }
   }
+  console.log(group);
 
   const createOptions = () => {
     return codes.map(code => (<option key={ code } value={ code }/>))
@@ -40,8 +41,8 @@ function JoinForm({ codes, addNewCode, room, addName }) {
             id='code-input'
             list='codes'
             placeholder='Group Code'
-            value={ roomCode }
-            onChange={(e) => { setRoomCode(e.target.value) }}
+            value={ groupCode }
+            onChange={(e) => { setGroupCode(e.target.value) }}
             />
           <datalist id='codes'>
             {createOptions()}
@@ -55,7 +56,7 @@ function JoinForm({ codes, addNewCode, room, addName }) {
             </Link>
             <Link to='/chat'>
               <button
-                disabled={ !(user && roomCode)}
+                disabled={ !(user && groupCode)}
                 onClick={saveMyCodes}
               >
               Chat!
@@ -66,9 +67,9 @@ function JoinForm({ codes, addNewCode, room, addName }) {
     );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   codes: state.codes,
-  room: state.roomCode
+  group: state.groupCode || ownProps.groupCode,
 })
 
 const mapDispatchToProps = dispatch => ({

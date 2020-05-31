@@ -20,14 +20,14 @@ function ChatContainer({ groupCode, roomCode, name }) {
   useEffect(() => {
     socket.on("message",function(msg) {  
       setMessages([...messages, msg]); 
-      socket.emit('recived', true)
+      socket.emit('received', true)
     });
   },[messages.length])
 
   useEffect(() => {
     socket.on("join_room",function(data) {  
       setRoomDetails(data)
-      socket.emit('recived', true)
+      socket.emit('received', true)
     });
   },[roomDetails])
 
