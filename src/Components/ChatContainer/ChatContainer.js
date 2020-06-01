@@ -5,11 +5,13 @@ import ChatDisplay from './../ChatDisplay/ChatDisplay.js'
 import io from 'socket.io-client';   
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { addRoomCode } from '../../Actions/index.js'
+
 
 
 const endPoint = "http://localhost:8080";  
 
-function ChatContainer({ groupCode, roomCode, name }) {
+function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
@@ -34,8 +36,9 @@ function ChatContainer({ groupCode, roomCode, name }) {
   },[messages.length])
 
   useEffect(() => {
-    socket.on("join_room",function(data) {  
-      setRoomDetails(data)
+    socket.on("join_room",function(room) {  
+      setRoomDetails({user_two: 'test user'})
+      addRoomCode(room)
       socket.emit('received', true)
     });
   },[roomDetails])
@@ -55,7 +58,10 @@ function ChatContainer({ groupCode, roomCode, name }) {
     <section className="ChatContainer">
       <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
       {error && <p className='error'>{ error }</p>}
-      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } scrollToBottom={scrollToBottom} socket={ socket } /> }
+      { roomDetails.user_two && <ChatForm name={name}
+      roomCode={ roomCode }
+      setError={ setError } scrollToBottom={scrollToBottom}
+      socket={ socket } /> }
       { !groupCode && <Redirect to='/' /> }
     </section>
   );
@@ -65,6 +71,10 @@ const mapStateToProps = state => ({
   groupCode: state.groupCode,
   roomCode: state.roomCode,
   name: state.name
+})
+
+const mapDispatchToProps = dispatch => ({
+  addRoomCode: code => dispatch(addRoomCode(code)),
 })
 
 
