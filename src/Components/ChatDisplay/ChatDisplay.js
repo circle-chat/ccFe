@@ -2,8 +2,8 @@ import React, { useState, useEffect, Component } from 'react';
 import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
-function ChatDisplay({ messages, group, userTwo }) {
-
+const ChatDisplay = React.forwardRef(({ messages, group, userTwo }, ref) => {
+  console.log(ref);
   const displayMessages = () => {
     return messages.map(message => {
       return (
@@ -24,8 +24,9 @@ function ChatDisplay({ messages, group, userTwo }) {
       { !userTwo && <Participant group={ group } waiting={ true } /> }
       { userTwo && <Participant group={ group } userTwo={ userTwo } waiting={ false } /> }
       { userTwo && <ul> {displayMessages()} </ul> }
+      <div className='empty-space' ref={ref} />
     </section>
   );
-}
+})
 
 export default ChatDisplay;

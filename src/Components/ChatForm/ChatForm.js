@@ -3,7 +3,7 @@ import './ChatForm.css';
 import uniqid from 'uniqid';
 
 
-function ChatForm({ socket, setError, roomCode, name }) {
+function ChatForm({ socket, setError, roomCode, name, scrollToBottom }) {
   const [ message, setMessage ] = useState('')
 
   const handleClick = e => {
@@ -12,6 +12,7 @@ function ChatForm({ socket, setError, roomCode, name }) {
       socket.emit('message', {message, id: uniqid(), room: roomCode, sender_name: name})
       setMessage('')
       setError('')
+      scrollToBottom()
     } else {
       setError('message must contain text')
     }
