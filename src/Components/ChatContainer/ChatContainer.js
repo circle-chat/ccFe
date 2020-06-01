@@ -32,12 +32,12 @@ function ChatContainer({ groupCode, roomCode, name }) {
   },[roomDetails])
 
   const leaveChat = () => {
-    socket.emit('leave', roomDetails)
+    socket.disconnect();
   }
 
   useLayoutEffect(() => {
     socket.emit('join_group', {groupCode, name})
-
+    setTimeout(setRoomDetails, 3000, { user_two: 'kyle' })
     return leaveChat
   }, []) 
 
