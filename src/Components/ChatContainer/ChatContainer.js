@@ -15,9 +15,15 @@ function ChatContainer({ groupCode, roomCode, name }) {
   const [error, setError] = useState('');
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
 
+  const messagesEndRef = React.createRef()
+  
   const getMessages = msg => {
     messages.push(msg)
     setMessages([...messages])
+
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   useEffect(() => {
@@ -47,9 +53,9 @@ function ChatContainer({ groupCode, roomCode, name }) {
 
   return (
     <section className="ChatContainer">
-      <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
+      <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
       {error && <p className='error'>{ error }</p>}
-      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } socket={ socket } /> }
+      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } scrollToBottom={scrollToBottom} socket={ socket } /> }
       { !groupCode && <Redirect to='/' /> }
     </section>
   );
