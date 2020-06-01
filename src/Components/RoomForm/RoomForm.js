@@ -20,7 +20,7 @@ function RoomForm({getCircleCode}) {
       headers: { 
         'Content-Type': 'application/json' 
       }, 
-      body: JSON.stringify({ description: groupName, rules })
+      body: JSON.stringify({ name: groupName, rules, description: 'placeholder' })
     })
     const data = await response.json()
     getCircleCode(data.access_code)
@@ -33,7 +33,7 @@ function RoomForm({getCircleCode}) {
   const addRule = e => {
     e.preventDefault()
     if (potentialRule) {
-      const formattedRule = {id: uniqid(), rule: potentialRule}
+      const formattedRule = {rule: potentialRule}
       handleRules([...rules, formattedRule])
       setRule('')
       scrollToBottom()
@@ -53,7 +53,7 @@ function RoomForm({getCircleCode}) {
   const createRules = () => {
     return rules.map(rule => {
       return (
-        <div className='rule' key={ rule.id }>
+        <div className='rule' key={ uniqid() }>
           <button type='button' id={ rule.id } onClick={ (e)=> { removeRule(e.target.id) } }>X</button>
           <h4>{ rule.rule }</h4>
         </div>
