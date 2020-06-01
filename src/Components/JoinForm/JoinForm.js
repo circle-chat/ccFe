@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { addNewCode, addName } from './../../Actions';
 
 function JoinForm({ codes, addNewCode, group = '', addName }) {
   const [ user, setUser ] = useState('')
-  const [ groupCode, setGroupCode ] = useState(group)
+  const [ groupCode, setGroupCode ] = useState('')
 
   const saveMyCodes = () => {
     addName(user)
@@ -19,6 +19,10 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
   const createOptions = () => {
     return codes.map(code => (<option key={ code } value={ code }/>))
   }
+
+  useEffect(() => {
+    setGroupCode(group)
+  },[group])
 
     return (
         <form className="JoinForm">

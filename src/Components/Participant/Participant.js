@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useEffect } from 'react';
 import './Participant.css';
 import LoadingBalls from './../LoadingBalls/LoadingBalls.js';
 import { CopyToClipboard } from 'react-copy-to-clipboard';

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
@@ -16,21 +16,23 @@ function App({ grabLocalCodes }) {
   const history = useHistory()
 
 
-  const storeMyCodes = () => {
-    const codes = JSON.parse(window.localStorage.getItem('codes'))
-    if (codes) {
-      grabLocalCodes( codes )
-    }
-  }
+
 
   useLayoutEffect(() => {
+    const storeMyCodes = () => {
+      const codes = JSON.parse(window.localStorage.getItem('codes'))
+      if (codes) {
+        grabLocalCodes( codes )
+      }
+    }
+
     storeMyCodes()
     let IsJoin = window.location.pathname === '/'
     let IsAlsoJoin = window.location.pathname.includes('join')
     let landing = IsJoin || IsAlsoJoin ?
     'main-page' : 'not-main'
     setLocation(landing)
-  },[])
+  },[grabLocalCodes])
 
   history.listen((location) => {
     let landing = window.location.pathname === '/' ?
