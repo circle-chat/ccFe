@@ -36,7 +36,7 @@ function ChatContainer({ groupCode, roomCode, name }) {
   }
 
   useLayoutEffect(() => {
-    socket.emit('join_group', {access_code: groupCode})
+    socket.emit('join_group', {access_code: groupCode, user_name: name})
     return leaveChat
   }, []) 
 
