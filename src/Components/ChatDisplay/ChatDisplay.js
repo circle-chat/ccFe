@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Component } from 'react';
+import React from 'react';
 import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
 const ChatDisplay = React.forwardRef(({ messages, group, userTwo }, ref) => {
-  console.log(ref);
   const displayMessages = () => {
     return messages.map(message => {
       return (

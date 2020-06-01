@@ -1,11 +1,10 @@
 import React from "react";
 import ChatContainer from "./ChatContainer";
 import io from "socket.io-client";
-import { render, waitFor, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
 import { addNewCode, addRoomCode, addName } from './../../Actions';
-import uniqid from 'uniqid';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -15,9 +14,6 @@ import rootReducer from '../../reducers';
 const testStore = createStore(rootReducer);
 
 
-
-const rules = [{id: uniqid(), rule: 'No Swearing'},{id: uniqid(), rule: 'No Nudity'}, {id: uniqid(), rule: 'Test'}]
-const groupDetails = {description:'test', rules}
 
 
 
@@ -39,7 +35,7 @@ describe("<ChatContainer />", () => {
   beforeEach(() => {
     socket = new SocketMock();
     socket.socketClient.disconnect = jest.fn()
-    io.connect = jest.fn().mockImplementation(() => socket.socketClient)  
+    io.connect = jest.fn().mockImplementation(() => socket.socketClient)
   })
 
   it("User can join_group", () => {
@@ -51,9 +47,9 @@ describe("<ChatContainer />", () => {
   });
 
   it("User can send a chat", () => {
-    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {user_two: 'karl'})
+      socket.emit('join_room', {user_two: 'karl'});
     });
     const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
@@ -72,12 +68,11 @@ describe("<ChatContainer />", () => {
   });
 
   it("Error shows up when input is blocked", () => {
-    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    const { getByText } = renderChatContainer()
     act(() => {
       socket.emit('join_room', {user_two: 'karl'})
     });
 
-    const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
 
     fireEvent.click(messageSend)
@@ -87,8 +82,8 @@ describe("<ChatContainer />", () => {
     expect(errorMsg).toBeInTheDocument()
   });
 
-  it("Should be able to recive a message", async () => {
-    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+  it("Should be able to recive a message", () => {
+    const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
       socket.emit('join_room', {user_two: 'karl'})
     });
@@ -106,12 +101,11 @@ describe("<ChatContainer />", () => {
     socket.on('received', function (received) {
         expect(received).toBe(true);
     });
-    const message = await waitFor(() => getByText('Test'))
 
   });
 
   it("Should show waiting screen if not connected", () => {
-    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    const { getByText } = renderChatContainer()
     const waitingMessage = getByText('Waiting to Connect')
 
     expect(waitingMessage).toBeInTheDocument()
