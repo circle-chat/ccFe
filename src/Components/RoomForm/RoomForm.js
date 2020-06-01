@@ -16,8 +16,12 @@ function RoomForm({getCircleCode}) {
   const messagesEndRef = React.createRef()
 
   const storeCode = async () => {
-    const data = await postGroup( groupName, rules, description )
-    getCircleCode(data.access_code)
+    try {
+      const data = await postGroup( groupName, rules, description )
+      getCircleCode(data.access_code)
+    } catch (err) {
+      console.log(err);
+    } 
   }
 
   const scrollToBottom = () => {
@@ -27,7 +31,7 @@ function RoomForm({getCircleCode}) {
   const addRule = e => {
     e.preventDefault()
     if (potentialRule) {
-      const formattedRule = {rule: potentialRule}
+      const formattedRule = {id:uniqid(), rule: potentialRule}
       handleRules([...rules, formattedRule])
       setRule('')
       scrollToBottom()
@@ -47,7 +51,7 @@ function RoomForm({getCircleCode}) {
   const createRules = () => {
     return rules.map(rule => {
       return (
-        <div className='rule' key={ uniqid() }>
+        <div className='rule' key={ rule.id  }>
           <button type='button' id={ rule.id } onClick={ (e)=> { removeRule(e.target.id) } }>X</button>
           <h4>{ rule.rule }</h4>
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import ChatContainer from "./ChatContainer";
 import io from "socket.io-client";
-import { render, waitFor, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
 import { addNewCode, addRoomCode, addName } from './../../Actions';
@@ -12,7 +12,6 @@ import rootReducer from '../../reducers';
 
 
 const testStore = createStore(rootReducer);
-
 
 
 
@@ -36,7 +35,7 @@ describe("<ChatContainer />", () => {
   beforeEach(() => {
     socket = new SocketMock();
     socket.socketClient.disconnect = jest.fn()
-    io.connect = jest.fn().mockImplementation(() => socket.socketClient)  
+    io.connect = jest.fn().mockImplementation(() => socket.socketClient)
   })
 
   it("User can join_group", () => {
@@ -50,7 +49,7 @@ describe("<ChatContainer />", () => {
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {user_two: 'karl'})
+      socket.emit('join_room', {user_two: 'karl'});
     });
     const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
@@ -83,7 +82,7 @@ describe("<ChatContainer />", () => {
     expect(errorMsg).toBeInTheDocument()
   });
 
-  it("Should be able to recive a message", async () => {
+  it("Should be able to recive a message", () => {
     const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
       socket.emit('join_room', {user_two: 'karl'})
@@ -102,7 +101,7 @@ describe("<ChatContainer />", () => {
     socket.on('received', function (received) {
         expect(received).toBe(true);
     });
-    const message = await waitFor(() => getByText('Test'))
+    const message = getByText('Test')
     expect(message).toBeInTheDocument();
 
   });

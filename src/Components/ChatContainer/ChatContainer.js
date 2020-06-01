@@ -18,39 +18,42 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
 
   const messagesEndRef = React.createRef()
-  
+
   const getMessages = msg => {
     messages.push(msg)
     setMessages([...messages])
 
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
-  }
-
   useEffect(() => {
     socket.on("message",function(msg) {  
       getMessages(msg); 
-      socket.emit('received', true)
-    }); 
-  },[messages.length])
+      socket.emit('received', true);
+    });
+
+    const scrollToBottom = () => {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    scrollToBottom()
+  },[messages, messages.length, messagesEndRef, socket]);
 
   useEffect(() => {
     socket.on("join_room",function(room) {  
-      setRoomDetails({user_two: 'test user'})
       addRoomCode(room)
-      socket.emit('received', true)
+      setRoomDetails({user_two: 'test user'});
+      socket.emit('received', true);
     });
-  },[roomDetails])
-
-  const leaveChat = () => {
-    socket.disconnect()
-  }
+  });
 
   useLayoutEffect(() => {
-    socket.emit('join_group', {access_code: groupCode, user_name: name})
-    return leaveChat
-  }, []) 
+    socket.emit('join_group', {access_code: groupCode, user_name: name});
+
+    const leaveChat = () => {
+      socket.disconnect();
+    }
+
+    return leaveChat;
+  }, [groupCode, name, socket]) 
 
 
 
@@ -58,10 +61,13 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
     <section className="ChatContainer">
       <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
       {error && <p className='error'>{ error }</p>}
-      { roomDetails.user_two && <ChatForm name={name}
-      roomCode={ roomCode }
-      setError={ setError } scrollToBottom={scrollToBottom}
-      socket={ socket } /> }
+      { roomDetails.user_two && <ChatForm
+          name={name}
+          roomCode={ roomCode }
+          setError={ setError }
+          socket={ socket }
+        />
+      }
       { !groupCode && <Redirect to='/' /> }
     </section>
   );
@@ -71,11 +77,11 @@ const mapStateToProps = state => ({
   groupCode: state.groupCode,
   roomCode: state.roomCode,
   name: state.name
-})
+});
 
 const mapDispatchToProps = dispatch => ({
   addRoomCode: code => dispatch(addRoomCode(code)),
-})
+});
 
 
-export default connect(mapStateToProps, null)(ChatContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

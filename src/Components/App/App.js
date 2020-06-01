@@ -16,14 +16,16 @@ function App({ grabLocalCodes }) {
   const history = useHistory()
 
 
-  const storeMyCodes = () => {
-    const codes = JSON.parse(window.localStorage.getItem('codes'))
-    if (codes) {
-      grabLocalCodes( codes )
-    }
-  }
+
 
   useLayoutEffect(() => {
+    const storeMyCodes = () => {
+      const codes = JSON.parse(window.localStorage.getItem('codes'))
+      if (codes) {
+        grabLocalCodes( codes )
+      }
+    }
+
     storeMyCodes()
   },[])
 
