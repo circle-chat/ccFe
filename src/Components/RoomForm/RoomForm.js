@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { getCircleCode } from './../../Actions/index.js';
 
-const endPoint = "http://localhost:5000"
+const endPoint = "http://localhost:8080"
 
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')

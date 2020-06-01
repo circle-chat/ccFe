@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 
-const endPoint = "http://localhost:5000";  
+const endPoint = "http://localhost:8080";  
 
 function ChatContainer({ groupCode, roomCode, name }) {
   const socket = io.connect(`${endPoint}`);
@@ -36,10 +36,10 @@ function ChatContainer({ groupCode, roomCode, name }) {
   }
 
   useLayoutEffect(() => {
-    socket.emit('join_group', {groupCode, name})
-    setTimeout(setRoomDetails, 3000, { user_two: 'kyle' })
+    socket.emit('join_group', {access_code: groupCode})
     return leaveChat
   }, []) 
+
 
 
   return (
