@@ -32,10 +32,11 @@ testStore.dispatch(addRoomCode('test-room-code'))
 testStore.dispatch(addName('test-name'))
 
 describe("<ChatContainer />", () => {
-  io.connect = jest.fn().mockImplementation(() => socket.socketClient)
   let socket
   beforeEach(() => {
     socket = new SocketMock();
+    socket.socketClient.disconnect = jest.fn()
+    io.connect = jest.fn().mockImplementation(() => socket.socketClient)  
   })
 
   it("User can join_group", () => {
