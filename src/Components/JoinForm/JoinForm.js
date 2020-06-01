@@ -15,7 +15,6 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
       window.localStorage.setItem('codes', JSON.stringify( [groupCode, ...codes] ))
     }
   }
-  console.log(group);
 
   const createOptions = () => {
     return codes.map(code => (<option key={ code } value={ code }/>))
