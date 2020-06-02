@@ -7,12 +7,22 @@ import { addNewCode, addName } from './../../Actions';
 function JoinForm({ codes, addNewCode, group = '', addName }) {
   const [ user, setUser ] = useState('')
   const [ groupCode, setGroupCode ] = useState('')
+  const [ errors, setErrors ] = useState([])
 
   const saveMyCodes = () => {
     addName(user)
     addNewCode(groupCode)
     if ( !codes.includes(groupCode)) {
       window.localStorage.setItem('codes', JSON.stringify( [groupCode, ...codes] ))
+    }
+  }
+
+  const handleBlur = (e) => {
+    let error = e.target.placeholder
+    if (!e.target.value && !errors.includes(error)) {
+      setErrors([...errors, error])
+    } else {
+      setErrors(errors.filter(err => err !== error))
     }
   }
 
@@ -31,6 +41,8 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
               ?
             </button>
           </Link>
+          {errors.length > 1 && <p className='error'>{errors.join(', ')} are required fields</p>}
+          {errors.length === 1 && <p className='error'>{errors.join(', ')} is a required field</p>}
           <section className='input-container'>
             <label htmlFor='name-input'>Name:
             </label>
@@ -39,6 +51,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
             type='text'
             placeholder='Name'
             value={ user }
+            onBlur={(e)=> handleBlur(e)}
             onChange={(e) => { setUser(e.target.value) }}
             />
           </section>
@@ -50,6 +63,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
             list='codes'
             placeholder='Group Code'
             value={ groupCode }
+            onBlur={(e)=> handleBlur(e)}
             onChange={(e) => { setGroupCode(e.target.value) }}
             />
           <datalist id='codes'>
