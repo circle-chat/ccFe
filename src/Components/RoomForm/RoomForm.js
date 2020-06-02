@@ -75,12 +75,12 @@ function RoomForm({getCircleCode}) {
       <form onSubmit={ (e) => {e.preventDefault()} } className="RoomForm">
         {error && <p className='error'>*{error} is a required field</p>}
         <section className='input-container'>
-          <label htmlFor='room-input'>*Group:
+          <label htmlFor='room-input'>*Group Name:
           </label>
           <input
           id='room-input'
           type='text'
-          placeholder='Name'
+          placeholder='Group Name'
           value={ groupName }
           onBlur={(e)=> { handleBlur(e) }}
           onChange={(e) => { setRoomname(e.target.value) }}

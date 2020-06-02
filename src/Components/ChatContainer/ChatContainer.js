@@ -47,13 +47,15 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   useLayoutEffect(() => {
     socket.emit('join_group', {access_code: groupCode, user_name: name});
+    console.log(groupCode, name);
 
     const leaveChat = () => {
+      socket.emit('leave', {room: roomCode});
       socket.disconnect();
     }
 
     return leaveChat;
-  }, [groupCode, name, socket]) 
+  }, [groupCode, name, roomCode, socket]) 
 
 
 
