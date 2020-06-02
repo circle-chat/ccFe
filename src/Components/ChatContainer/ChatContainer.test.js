@@ -106,7 +106,7 @@ describe("<ChatContainer />", () => {
   });
 
   it("Should be able to recive two messages", () => {
-    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
       socket.emit('join_room', {room:'test-room-code', match: 'karl'})
     });
