@@ -42,9 +42,8 @@ describe("<ChatForm />", () => {
   });
 
   it("Error is set on blocked input", () => {
-    const { getByText, getByPlaceholderText } = renderChatForm()
+    const { getByText } = renderChatForm()
 
-    const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
 
     fireEvent.click(messageSend)
