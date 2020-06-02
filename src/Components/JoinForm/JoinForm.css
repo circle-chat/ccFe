@@ -20,3 +20,7 @@
 .JoinForm .button-box {
   height: 25%;
 }
+
+form .error {
+  color: inherit;
+}

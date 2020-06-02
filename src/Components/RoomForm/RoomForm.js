@@ -12,8 +12,18 @@ function RoomForm({getCircleCode}) {
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
   const [ description, setDescription ] = useState('')
+  const [ error, setError ] = useState('')
 
   const messagesEndRef = React.createRef()
+
+  const handleBlur = (e) => {
+    let error = e.target.placeholder
+    if (!e.target.value) {
+      setError(error)
+    } else {
+      setError('')
+    }
+  }
 
   const storeCode = async () => {
     try {
@@ -63,14 +73,16 @@ function RoomForm({getCircleCode}) {
 
     return (
       <form onSubmit={ (e) => {e.preventDefault()} } className="RoomForm">
+        {error && <p className='error'>*{error} is a required field</p>}
         <section className='input-container'>
-          <label htmlFor='room-input'>Group:
+          <label htmlFor='room-input'>*Group:
           </label>
           <input
           id='room-input'
           type='text'
           placeholder='Name'
           value={ groupName }
+          onBlur={(e)=> { handleBlur(e) }}
           onChange={(e) => { setRoomname(e.target.value) }}
           />
         </section>
