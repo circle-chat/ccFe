@@ -107,6 +107,33 @@ describe("<ChatContainer />", () => {
 
   });
 
+  it("Should be able to recive two messages", () => {
+    const { getByText, getByPlaceholderText, debug } = renderChatContainer()
+    act(() => {
+      socket.emit('join_room', {room:'test-room-code', match: 'karl'})
+    });
+    const messageInput = getByPlaceholderText('Type a message here...')
+    const messageSend = getByText('Send Message')
+
+
+    socket.on('message', function (message) {
+      socket.emit('message', message)
+     });
+
+    fireEvent.change(messageInput, { target: { value: 'Test' } })
+    fireEvent.click(messageSend)
+
+    fireEvent.change(messageInput, { target: { value: 'Test2' } })
+    fireEvent.click(messageSend)
+
+    socket.on('received', function (received) {
+        expect(received).toBe(true);
+    });
+    const message1 = getByText('Test')
+    const message2 = getByText('Test2')
+    expect(message1 && message2).toBeInTheDocument()
+  });
+
   it("Should show waiting screen if not connected", () => {
     const { getByText } = renderChatContainer()
     const waitingMessage = getByText('Waiting to Connect')
