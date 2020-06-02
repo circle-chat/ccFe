@@ -9,29 +9,36 @@ import { Redirect } from 'react-router';
 
 const endPoint = "http://localhost:5000";  
 
-function ChatContainer({ groupCode, roomCode }) {
+function ChatContainer({ groupCode, roomCode, name }) {
   const socket = io.connect(`${endPoint}`);
-  const [messages, setMessages] = useState([{text: 'test1', id: 1, senderName: 'John' }, {text: 'test2', id: 2, senderName: 'Allen' }, {text: 'test3', id: 3, senderName: 'Alan' }]);
+  const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
 
 
 
-  const getMessages = () => { 
-    socket.on("message", msg => { 
-      setMessages([...messages, JSON.parse(msg)]); 
-    }); 
-  };
-
   useEffect(() => {
     socket.on("message",function(msg) {  
-      getMessages(msg); 
+      setMessages([...messages, msg]); 
       socket.emit('recived', true)
-    }); 
+    });
   },[messages.length])
 
+  useEffect(() => {
+    socket.on("join_room",function(data) {  
+      setRoomDetails(data)
+      socket.emit('recived', true)
+    });
+  },[roomDetails])
+
+  const leaveChat = () => {
+    socket.emit('leave', roomDetails)
+  }
+
   useLayoutEffect(() => {
-    socket.emit('join_group', groupCode)
+    socket.emit('join_group', {groupCode, name})
+
+    return leaveChat
   }, []) 
 
 
@@ -39,7 +46,7 @@ function ChatContainer({ groupCode, roomCode }) {
     <section className="ChatContainer">
       <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
       {error && <p>{ error }</p>}
-      { roomDetails.user_two && <ChatForm roomCode={ roomCode } setError={ setError } socket={ socket } /> }
+      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } socket={ socket } /> }
       { !groupCode && <Redirect to='/' /> }
     </section>
   );
@@ -47,7 +54,8 @@ function ChatContainer({ groupCode, roomCode }) {
 
 const mapStateToProps = state => ({
   groupCode: state.groupCode,
-  roomCode: state.roomCode
+  roomCode: state.roomCode,
+  name: state.name
 })
 
 

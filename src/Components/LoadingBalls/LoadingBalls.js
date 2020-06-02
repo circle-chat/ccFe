@@ -3,7 +3,7 @@ import './LoadingBalls.css';
 
 function LoadingBalls() {
   return (
-    <div class="loader" id="loader-4"> 
+    <div className="loader" id="loader-4"> 
       <span></span> 
       <span></span> 
       <span></span> 

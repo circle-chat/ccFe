@@ -11,7 +11,6 @@ function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
-  const [ roomID, setroomID ] = useState(uniqid())
 
   const messagesEndRef = React.createRef()
 
@@ -76,9 +75,6 @@ function RoomForm({getCircleCode}) {
           value={ groupName }
           onChange={(e) => { setRoomname(e.target.value) }}
           />
-        </section>
-        <section className='input-container'>
-          <label>Group Code:</label> <h2>{ roomID }</h2>
         </section>
         <h3 className='rules-head'>Group Rules</h3>
         <section className='rules-container'>

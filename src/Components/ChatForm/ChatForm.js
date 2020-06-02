@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './ChatForm.css';
+import uniqid from 'uniqid';
 
 
-function ChatForm({ socket, setError, roomCode }) {
+function ChatForm({ socket, setError, roomCode, name }) {
   const [ message, setMessage ] = useState('')
 
   const handleClick = e => {
     e.preventDefault()
     if (message) {
-      socket.emit('message', {message, room:roomCode})
+      socket.emit('message', {message, id: uniqid(), room: roomCode, sender_name: name})
       setMessage('')
       setError('')
     } else {
