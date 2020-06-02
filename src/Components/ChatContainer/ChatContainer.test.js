@@ -36,6 +36,7 @@ describe("<ChatContainer />", () => {
     socket = new SocketMock();
     socket.socketClient.disconnect = jest.fn()
     io.connect = jest.fn().mockImplementation(() => socket.socketClient)
+    window.HTMLElement.prototype.scrollIntoView = function() {};
   })
 
   it("User can join_group", () => {
@@ -49,7 +50,7 @@ describe("<ChatContainer />", () => {
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {user_two: 'karl'});
+      socket.emit('join_room', 'test-room-code');
     });
     const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
