@@ -26,7 +26,7 @@ function ChatContainer({ groupCode, roomCode }) {
   useEffect(() => {
     socket.on("message",function(msg) {  
       getMessages(msg); 
-      socket.emit('recived', true)
+      socket.emit('received', true)
     }); 
   },[messages.length])
 

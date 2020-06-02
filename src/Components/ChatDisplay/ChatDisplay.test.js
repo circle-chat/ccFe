@@ -1,58 +1,50 @@
 import React from "react";
 import ChatDisplay from "./ChatDisplay";
+import ChatForm from './../ChatForm/ChatForm.js';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../reducers';
 import { MemoryRouter as Router } from 'react-router-dom';
-import { postGroup } from './../../APICalls.js'
+// import { postGroup } from './../../APICalls.js'
 import uniqid from 'uniqid';
+import { handleClick } from './../ChatForm/ChatForm.js';
+import { addNewCode, addRoomCode } from './../../Actions';
+// import SocketMock from 'socket.io-mock';
 
+// jest.mock('./../../APICalls.js')
+// jest.mock('uniqid')
 
+const createMessage = (message) => {
+  return { 'message': message, 'sender_name': 'joe', 'id': uniqid() }
+}
 
-jest.mock('./../../APICalls.js')
-jest.mock('uniqid')
-
-const testStore = createStore(rootReducer);
-
-
-
+// let socket = new SocketMock();
 
 function renderChatDisplay() {
   return render(
-    <Router>
-      <Provider store={testStore}>
-        <ChatDisplay  />
-      </Provider>
-    </Router>
+    <ChatDisplay
+            userTwo={ 'name string' }
+            group={ 'code string' }
+            messages={ [ createMessage('Test-Message1'), createMessage('Test-Message2'), createMessage('Test-Message3') ] }
+          />
   )
 }
 
 describe("<ChatDisplay />", () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
-  postGroup.mockResolvedValue({ access_code: '1234' })
 
-  it('chat disabled if form is not filled out', () => {
-    const { getByText, debug, getByPlaceholderText } = renderChatDisplay()
+  it('can display a message', () => {
+      const { getByText, debug } = renderChatDisplay()
 
-    uniqid.mockReturnValue('12345id')
+      const message1 = getByText('Test-Message1')
+      const message2 = getByText('Test-Message2')
+      const message3 = getByText('Test-Message3')
 
-    const sendButton = getByText('Send Message')
-    const messageInput = getByPlaceholderText('Type a message here...')
-
-    expect(createButton.disabled).toBe(true)
-
-    const nameInput = getByPlaceholderText('Name')
-
-    fireEvent.change(nameInput, { target: { value: 'Test-Name' } })
-    fireEvent.change(ruleInput, { target: { value: 'Test-Rule' } })
-
-    fireEvent.click(plusButton)
-    fireEvent.click(createButton)
-    expect(postGroup).toHaveBeenCalled()
-    expect(postGroup).toHaveBeenCalledWith( 'Test-Name', [{ "id": "12345id", "rule": "Test-Rule" }], '' )
-    debug()
-})
+      expect(message1).toBeInTheDocument
+      expect(message2).toBeInTheDocument
+      expect(message3).toBeInTheDocument
+  })
 
 });

@@ -9,10 +9,10 @@ function ChatDisplay({ messages, group, userTwo }) {
       return (
         <li key={message.id}>
           <div>
-            {message.senderName}
+            {message.sender_name}
           </div>
           <div>
-            {message.text}
+            {message.message}
           </div>
         </li>
       )
