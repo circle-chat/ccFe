@@ -1,17 +1,13 @@
 import React from "react";
 import ChatForm from "./ChatForm";
-import io from "socket.io-client";
-import { render, waitFor, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
-import { addNewCode, addRoomCode } from './../../Actions';
+import uniqid from 'uniqid';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from '../../reducers';
+jest.mock('uniqid')
 
 
-const testStore = createStore(rootReducer);
 
  let socket = new SocketMock();
 
@@ -21,13 +17,17 @@ const testStore = createStore(rootReducer);
 
 function renderChatForm() {
   return render(
-        <ChatForm socket={socket} roomCode={'test-code'} setError={mockSetError} />
+        <ChatForm
+          socket={socket}
+          roomCode={'test-code'} setError={mockSetError}
+          name={'alan'}
+        />
   )
 }
 
 describe("<ChatForm />", () => {
   socket.emit = jest.fn()
-
+  uniqid.mockReturnValue('12345id')
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText } = renderChatForm()
 
@@ -38,7 +38,7 @@ describe("<ChatForm />", () => {
     fireEvent.click(messageSend)
 
     expect(socket.emit).toHaveBeenCalled()
-    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', room:'test-code'})
+    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', sender_name: "alan", room:'test-code', "id": "12345id"})
   });
 
   it("Error is set on blocked input", () => {
