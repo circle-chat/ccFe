@@ -36,10 +36,10 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
 
     return (
         <form className="JoinForm">
-          {errors.length > 1 && <p className='error'>{errors.join(', ')} are required fields</p>}
-          {errors.length === 1 && <p className='error'>{errors.join(', ')} is a required field</p>}
+          {errors.length > 1 && <p className='error'>*{errors.join(', ')} are required fields</p>}
+          {errors.length === 1 && <p className='error'>*{errors.join(', ')} is a required field</p>}
           <section className='input-container'>
-            <label htmlFor='name-input'>Name:
+            <label htmlFor='name-input'>*Name:
             </label>
             <input
             id='name-input'
@@ -51,7 +51,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
             />
           </section>
           <section className='input-container'>
-            <label htmlFor='code-input'>Group Code:
+            <label htmlFor='code-input'>*Group Code:
             </label>
             <input
             id='code-input'
