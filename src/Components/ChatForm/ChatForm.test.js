@@ -21,8 +21,7 @@ function renderChatForm() {
 
 describe("<ChatForm />", () => {
   socket.emit = jest.fn()
-  uniqid.mockReturnValue('testId12')
-
+  uniqid.mockReturnValue('12345id')
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText } = renderChatForm()
 

@@ -15,7 +15,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
-  const [roomDetails, setRoomDetails] = useState( { user_two: null } );
+  const [roomDetails, setRoomDetails] = useState( { match: null } );
 
   const messagesEndRef = React.createRef()
 
@@ -59,9 +59,9 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   return (
     <section className="ChatContainer">
-      <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
+      <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.match } group={ groupCode } messages={ messages } />
       {error && <p className='error'>{ error }</p>}
-      { roomDetails.user_two && <ChatForm
+      { roomDetails.match && <ChatForm
           name={name}
           roomCode={ roomCode }
           setError={ setError }

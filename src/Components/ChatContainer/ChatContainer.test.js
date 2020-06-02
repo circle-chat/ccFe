@@ -50,7 +50,7 @@ describe("<ChatContainer />", () => {
   it("User can send a chat", () => {
     const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {room: 'test-room-code', user_two: 'karl'});
+      socket.emit('join_room', {room:'test-room-code', match: 'karl'});
     });
     const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
@@ -71,7 +71,7 @@ describe("<ChatContainer />", () => {
   it("Error shows up when input is blocked", () => {
     const { getByText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {room: 'test-room-code', user_two: 'karl'})
+      socket.emit('join_room', {room:'test-room-code', match: 'karl'})
     });
 
     const messageSend = getByText('Send Message')
@@ -86,7 +86,7 @@ describe("<ChatContainer />", () => {
   it("Should be able to recive a message", () => {
     const { getByText, getByPlaceholderText } = renderChatContainer()
     act(() => {
-      socket.emit('join_room', {room: 'test-room-code', user_two: 'karl'})
+      socket.emit('join_room', {room:'test-room-code', match: 'karl'})
     });
     const messageInput = getByPlaceholderText('Type a message here...')
     const messageSend = getByText('Send Message')
