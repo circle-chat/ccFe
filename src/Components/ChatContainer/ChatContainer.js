@@ -39,15 +39,28 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   useEffect(() => {
     socket.on("join_room",function(roomDetails) {  
+      console.log(roomDetails);
       addRoomCode(roomDetails.room)
       setRoomDetails(roomDetails);
       socket.emit('received', true);
     });
   });
 
+  useEffect(() => {
+    socket.on('join_group', function(group) {
+      console.log(group);
+    });
+  },[socket])
+
+
   useLayoutEffect(() => {
-    socket.emit('join_group', {access_code: groupCode, user_name: name});
-    console.log(groupCode, name);
+    if (groupCode) {
+      socket.emit('join_group', {'access_code': groupCode, 'name': name});
+      console.log({'access_code': groupCode, 'user_name': name});
+    }
+    socket.on('connect', (stuff) => {
+      console.log('Successfully connected!');
+    });
 
     const leaveChat = () => {
       socket.emit('leave', {room: roomCode});
