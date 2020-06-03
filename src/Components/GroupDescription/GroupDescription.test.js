@@ -42,9 +42,8 @@ function renderGroupDescription() {
 testStore.dispatch(addNewCode('test-code'))
 
 describe("<GroupDescription />", () => {
-
   it('can display group info', async () => {
-    getGroup.mockResolvedValue(groupWithRules)
+    getGroup.mockResolvedValueOnce(groupWithRules)
     const { getAllByTestId, getByText } = renderGroupDescription()
     const rules = await waitFor(() => getAllByTestId('rule'))
     const name = await waitFor(() => getByText('Welcome to, Gamer For Life'))

@@ -21,10 +21,6 @@ export const getGroup = async (code) => {
   const data = await response.json()
   const group = data.find(group => group.access_code === code)
 
-  if (!group) {
-    throw new Error('group does not exist')
-  }
-  
   return group
 
 }

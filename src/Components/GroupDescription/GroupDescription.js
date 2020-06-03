@@ -29,6 +29,9 @@ const GroupDescription = ({groupCode}) => {
     const fetchGroup = async () => {
       try {
         const group = await getGroup(groupCode)
+        if (!group) {
+          throw new Error('group does not exist')
+        }
         if (!JSON.parse(group.rules).length) {
           setUrl('/chat')
           return
