@@ -102,6 +102,7 @@ describe("<ChatContainer />", () => {
     socket.on('received', function (received) {
         expect(received).toBe(true);
     });
+    
     const message = getByText('Test')
     expect(message).toBeInTheDocument();
 

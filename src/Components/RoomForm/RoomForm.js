@@ -6,12 +6,19 @@ import { connect } from 'react-redux';
 import { getCircleCode } from './../../Actions/index.js';
 import { postGroup } from './../../APICalls.js'
 
+<<<<<<< HEAD
+=======
+const endPoint = "http://localhost:8080"
+>>>>>>> 7ea48172ce3c74f8b6ef860f94bf5f950e9c5ef9
 
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
+<<<<<<< HEAD
   const [ description, setDescription ] = useState('')
+=======
+>>>>>>> 7ea48172ce3c74f8b6ef860f94bf5f950e9c5ef9
   const [ error, setError ] = useState('')
 
   const messagesEndRef = React.createRef()

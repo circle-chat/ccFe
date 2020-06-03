@@ -15,7 +15,12 @@ jest.mock('uniqid')
 
 function renderChatForm() {
   return render(
-        <ChatForm socket={socket} roomCode={'test-code'} setError={mockSetError} name={'alan'} />
+        <ChatForm
+          socket={socket}
+          roomCode={'test-code'}
+          setError={mockSetError}
+          name={'alan'}
+        />
   )
 }
 
@@ -32,7 +37,7 @@ describe("<ChatForm />", () => {
     fireEvent.click(messageSend)
 
     expect(socket.emit).toHaveBeenCalled()
-    expect(socket.emit).toHaveBeenCalledWith('message', { "id": "testId12", "message": "Test", "room": "test-code", "sender_name": "alan"})
+    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', sender_name: "alan", room:'test-code', "id": "12345id"})
   });
 
   it("Error is set on blocked input", () => {
