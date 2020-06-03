@@ -21,7 +21,7 @@ function Participant({ waiting, userTwo, group }) {
     </section>
   )
 
-  const connectedMessage = <h3>Connected With</h3>
+  const connectedMessage = <h3>Connected With:</h3>
 
   return (
     <section className="Participant">
