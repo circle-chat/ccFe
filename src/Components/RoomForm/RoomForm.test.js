@@ -37,7 +37,7 @@ describe("<RoomForm />", () => {
   it('Renders the form', () => {
     const { getByText, getByPlaceholderText } = renderRoomForm()
 
-    const nameInput = getByPlaceholderText('Name')
+    const nameInput = getByPlaceholderText('Group Name')
     const ruleInput = getByPlaceholderText('Rule')
     const cancelButton = getByText('Cancel')
     const createButton = getByText('Create Group')
@@ -51,9 +51,9 @@ describe("<RoomForm />", () => {
   })
 
   it('Can add a rule', () => {
-    const { getByText, getByPlaceholderText, debug } = renderRoomForm()
+    const { getByText, getByPlaceholderText } = renderRoomForm()
 
-    const nameInput = getByPlaceholderText('Name')
+    const nameInput = getByPlaceholderText('Group Name')
     const ruleInput = getByPlaceholderText('Rule')
     const plusButton = getByText('+')
 
@@ -63,30 +63,30 @@ describe("<RoomForm />", () => {
     fireEvent.click(plusButton)
 
     const expected = getByText('Test-Rule')
-    debug()
     expect(expected).toBeInTheDocument()
   })
 
   it('chat disabled if form is not filled out', () => {
-    const { getByText, debug, getByPlaceholderText } = renderRoomForm()
+    const { getByText, getByPlaceholderText } = renderRoomForm()
 
     const createButton = getByText('Create Group')
+    const nameInput = getByPlaceholderText('Group Name')
     const ruleInput = getByPlaceholderText('Rule')
+    const descriptionInput = getByPlaceholderText('This Group is For...')
     const plusButton = getByText('+')
 
 
     expect(createButton.disabled).toBe(true)
 
-    const nameInput = getByPlaceholderText('Name')
 
     fireEvent.change(nameInput, { target: { value: 'Test-Name' } })
+    fireEvent.change(descriptionInput, { target: { value: 'Test-Description' } })
     fireEvent.change(ruleInput, { target: { value: 'Test-Rule' } })
 
     fireEvent.click(plusButton)
     fireEvent.click(createButton)
     expect(postGroup).toHaveBeenCalled()
-    expect(postGroup).toHaveBeenCalledWith( 'Test-Name', [{ "id": "12345id", "rule": "Test-Rule" }], '' )
-    debug()
+    expect(postGroup).toHaveBeenCalledWith( 'Test-Name', 'Test-Description', [{ "id": "12345id", "rule": "Test-Rule" }] )
   })
 
 });
