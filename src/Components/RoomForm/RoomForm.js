@@ -4,25 +4,21 @@ import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { getCircleCode } from './../../Actions/index.js';
+import { postGroup } from './../../APICalls.js'
 
-const endPoint = "http://localhost:5000"
 
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
   const [ potentialRule, setRule ] = useState('')
+  const [ roomID, setroomID ] = useState(uniqid())
+  const [ description, setDescription ] = useState('')
 
   const messagesEndRef = React.createRef()
 
   const storeCode = async () => {
-    const response = await fetch(`${endPoint}/groups`, {
-      method: 'POST', 
-      headers: { 
-        'Content-Type': 'application/json' 
-      }, 
-      body: JSON.stringify({ description: groupName, rules })
-    })
-    const data = await response.json()
+    const data = await postGroup( groupName, rules, description )
+    console.log(data);
     getCircleCode(data.access_code)
   }
 
