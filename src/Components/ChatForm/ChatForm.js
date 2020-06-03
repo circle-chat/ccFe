@@ -3,13 +3,13 @@ import './ChatForm.css';
 import uniqid from 'uniqid';
 
 
-function ChatForm({ socket, setError, roomCode, name }) {
+function ChatForm({ socket, setError, roomCode, name, sid }) {
   const [ message, setMessage ] = useState('');
 
   const handleClick = e => {
     e.preventDefault();
     if (message) {
-      socket.emit('message', {message, id: uniqid(), room: roomCode, sender_name: name});
+      socket.emit('message', {message, sid, id: uniqid(), room: roomCode, sender_name: name});
       setMessage('');
       setError('');
     } else {

@@ -9,7 +9,7 @@ import { addRoomCode } from '../../Actions/index.js'
 
 
 
-const endPoint = "http://localhost:8080";  
+const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app";  
 
 function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const socket = io.connect(`${endPoint}`);
@@ -32,10 +32,13 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   useEffect(() => {
 
     socket.on("message",function(msg) {  
-      displayMessages(msg)
-      socket.emit('received', true);
+      if (msg.id) {
+        displayMessages(msg)
+        socket.emit('received', true);
+      } else {
+        console.log(msg);
+      }
     });
-
 
     scrollToBottom()
   },[messages.length]);
@@ -45,15 +48,9 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
       addRoomCode(roomDetails.room)
       setRoomDetails(roomDetails);
       socket.emit('received', true);
+      // setSid(group.sid)
     });
   },[]);
-
-  useEffect(() => {
-    socket.on('join_group', function(group) {
-      setSid(group.sid)
-    });
-  },[])
-
 
   useEffect(() => {
     if (groupCode && !roomCode) {
@@ -62,6 +59,8 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
     socket.on('connect', (stuff) => {
       console.log('Successfully connected!');
+      setSid(socket.id)
+      console.log(sid);
     });
 
     const leaveChat = () => {
@@ -89,6 +88,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
       {error && <p className='error'>{ error }</p>}
       { roomDetails.match && <ChatForm
           name={name}
+          sid={sid}
           roomCode={ roomCode }
           setError={ setError }
           socket={ socket }

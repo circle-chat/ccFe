@@ -8,20 +8,41 @@
   justify-content: flex-end;
 }
 
+.ChatDisplay ul {
+  width: 100%;
+}
+
 .message {
   display: flex;
-  font-size: 1rem;
+  justify-content: center;
+  margin: 1% 0;
+  flex-direction: column-reverse;
+}
+
+.sender {
+  font-size: 0.8rem;
+  margin: 0.1rem 0.75rem 0;
+  text-transform: capitalize;
+}
+
+.sender::before,
+.sender::after {
+  content: "○";
 }
 
 .text {
-  margin-left: 1%;
-  width: 25rem;
+  font-size: 1rem;
+  max-width: 25rem;
+  border-radius: 20px;
+  background-color: rgba(138, 113, 192, 0.5);
+  border: 2px solid rgba(45, 39, 104, 0.33);
+  padding: 0.1rem 1rem;
 }
 
 .user-one {
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .user-two {
-  justify-content: flex-end;
+  align-items: flex-end;
 }

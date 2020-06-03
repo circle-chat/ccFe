@@ -50,14 +50,14 @@ const GroupDescription = ({groupCode}) => {
 
   if (!group.name) {
     return (
-    <section className='GroupDescription'>
-      {url && <Redirect to={url}/>}
-      <section className='waiting-for-group'>
-        <h2>Locating your Circle</h2>
-        <LoadingBalls />
+      <section className='GroupDescription'>
+        {url && <Redirect to={url}/>}
+        <section className='waiting-for-group'>
+          <h2>Locating your Circle</h2>
+          <LoadingBalls />
+        </section>
       </section>
-    </section>
-  )
+    )
   }
 
   return (

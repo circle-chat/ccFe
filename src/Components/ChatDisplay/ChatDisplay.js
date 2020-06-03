@@ -3,14 +3,16 @@ import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
 const ChatDisplay = React.forwardRef(({ messages, group, userTwo, sid }, ref) => {
+  // console.log(userTwo, sid);
   const displayMessages = () => {
     return messages.map(message => {
-      const isMe = userTwo.sid !== sid ? 'user-one' : 'user-two'
+      console.log(message.sid, sid);
+      const isMe = message.sid !== sid ? 'user-one' : 'user-two'
       return (
         <li className={`message ${isMe}`} key={message.id}>
-          <div>
+          <p className='sender'>
             {message.sender_name}
-          </div>
+          </p>
           <p className='text'>
             {message.message}
           </p>
