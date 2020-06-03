@@ -1,7 +1,8 @@
 .ChatDisplay {
   width: inherit;
-  height: 87%;
+  height: 70%;
   margin: 1.25% auto;
+  margin-top: 11%;
   overflow-x: scroll;
   display: flex;
   justify-content: flex-end;

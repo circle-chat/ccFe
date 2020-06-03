@@ -15,7 +15,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
-  const [roomDetails, setRoomDetails] = useState( { match: null } );
+  const [roomDetails, setRoomDetails] = useState( { match: 'will' } );
 
   const messagesEndRef = React.createRef()
 
