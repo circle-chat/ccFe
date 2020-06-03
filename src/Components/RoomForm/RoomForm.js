@@ -74,6 +74,18 @@ function RoomForm({getCircleCode}) {
           onChange={(e) => { setRoomname(e.target.value) }}
           />
         </section>
+        <section className='input-container'>
+          <label htmlFor='description-input'>Description:
+          </label>
+          <textarea
+          id='description-input'
+          placeholder='Description'
+          rows="2"
+          cols="50"
+          value={ description }
+          onChange={(e) => { setDescription(e.target.value) }}
+          />
+        </section>
         <h3 className='rules-head'>Group Rules</h3>
         <section className='rules-container'>
           {createRules()}
