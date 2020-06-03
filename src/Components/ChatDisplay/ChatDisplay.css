@@ -19,6 +19,26 @@
   flex-direction: column-reverse;
 }
 
+#profanity-check {
+  position: absolute;
+  bottom: .25rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  justify-content: space-around;
+}
+
+#profanity-check input:checked::after {
+  content: 'On';
+  /* margin-left: 1rem; */
+}
+
+#profanity-check input::after {
+  content: 'Off';
+  margin-left: 1rem;
+}
+
 .sender {
   font-size: 0.8rem;
   margin: 0.1rem 0.75rem 0;
