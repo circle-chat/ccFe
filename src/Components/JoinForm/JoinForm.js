@@ -57,7 +57,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
               Create Group
               </button>
             </Link>
-            <Link to='/chat'>
+            <Link to='/group'>
               <button
                 disabled={ !(user && groupCode)}
                 onClick={saveMyCodes}

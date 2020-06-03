@@ -1,0 +1,51 @@
+.GroupDescription {
+  margin: auto;
+  width: 60%;
+  max-height: 80%;
+  min-height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(45, 39, 104, 0.33);
+  border-radius: 20px;
+  padding: 1%;
+  backdrop-filter: blur(2px);
+}
+
+.GroupDescription section {
+  text-align: center;
+  margin: 1% 0;
+}
+
+.GroupDescription button {
+  height: 30px;
+  width: 145px;
+  font-size: 1rem;
+  margin-top: 4%;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: #58b1da;
+}
+
+.GroupDescription .group-welcome {
+  font-size: 2.25rem;
+}
+
+.GroupDescription .group-code-section {
+  font-size: 1.25rem;
+}
+
+.GroupDescription .group-description-section {
+  font-size: 1.25rem;
+}
+
+.GroupDescription .group-rules-section {
+  font-size: 1.2rem;
+}
+
+.GroupDescription .group-rules-section ul {
+  max-height: 10rem;
+  overflow-x: scroll;
+}

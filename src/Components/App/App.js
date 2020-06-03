@@ -2,12 +2,13 @@ import React, { useLayoutEffect, useState } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
+import GroupDescription from '../GroupDescription/GroupDescription.js';
 import ChatContainer from '../ChatContainer/ChatContainer.js';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import {ReactComponent as ChatLogo} from './assets/message.svg';
 import { grabLocalCodes } from './../../Actions/index.js';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom'
+
 
 
 
@@ -64,6 +65,9 @@ function App({ grabLocalCodes }) {
       />
       <Route path='/create'>
         <RoomForm />
+      </Route>
+      <Route path='/group'>
+        <GroupDescription />
       </Route>
       <Route path='/chat' exact>
         <ChatContainer />

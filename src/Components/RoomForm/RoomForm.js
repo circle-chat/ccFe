@@ -17,7 +17,7 @@ function RoomForm({getCircleCode}) {
 
   const storeCode = async () => {
     try {
-      const data = await postGroup( groupName, rules, description )
+      const data = await postGroup( groupName, description, rules )
       getCircleCode(data.access_code)
     } catch (err) {
       console.log(err);
@@ -79,7 +79,7 @@ function RoomForm({getCircleCode}) {
           </label>
           <textarea
           id='description-input'
-          placeholder='Description'
+          placeholder='This Group is For...'
           rows="2"
           cols="50"
           value={ description }
