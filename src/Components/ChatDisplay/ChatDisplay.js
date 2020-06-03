@@ -5,19 +5,20 @@ import Participant from './../Participant/Participant.js'
 const ChatDisplay = React.forwardRef(({ messages, group, userTwo }, ref) => {
   const displayMessages = () => {
     return messages.map(message => {
+      const isMe = userTwo !== message.sender_name ? 'user-one' : 'user-two'
       return (
-        <li key={message.id}>
+        <li className={`message ${isMe}`} key={message.id}>
           <div>
             {message.sender_name}
           </div>
-          <div>
+          <p className='text'>
             {message.message}
-          </div>
+          </p>
         </li>
       )
     })
   }
-  // console.log(messages);
+
   return (
     <section className="ChatDisplay">
       { !userTwo && <Participant group={ group } waiting={ true } /> }
