@@ -18,3 +18,9 @@
   margin-bottom: 0.25rem;
   margin-left: 1.5rem;
 }
+
+@media (max-width: 900px) {
+  .ChatContainer {
+    transform: scale(.9);
+  }
+}

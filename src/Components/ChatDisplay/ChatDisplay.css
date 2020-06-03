@@ -1,6 +1,6 @@
 .ChatDisplay {
   width: inherit;
-  height: 60%;
+  height: 58%;
   margin: 1.25% auto;
   margin-top: 11%;
   overflow-x: scroll;
@@ -66,4 +66,16 @@
 
 .user-two {
   align-items: flex-end;
+}
+
+@media (max-width: 850px) {
+  .ChatDisplay {
+    height: 73%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .ChatDisplay {
+    height: 68%;
+  }
 }
