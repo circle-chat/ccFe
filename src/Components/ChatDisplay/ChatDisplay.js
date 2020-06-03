@@ -17,7 +17,7 @@ const ChatDisplay = React.forwardRef(({ messages, group, userTwo }, ref) => {
       )
     })
   }
-
+  // console.log(messages);
   return (
     <section className="ChatDisplay">
       { !userTwo && <Participant group={ group } waiting={ true } /> }
