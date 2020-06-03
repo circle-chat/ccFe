@@ -20,7 +20,8 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const messagesEndRef = React.createRef()
 
   const displayMessages = (msg) => {
-    setMessages([...messages, msg]); 
+    messages.push(msg)
+    setMessages([...messages]); 
   }
 
   const scrollToBottom = () => {
