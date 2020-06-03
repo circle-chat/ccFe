@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCode, addName } from './../../Actions';
 
-function JoinForm({ codes, addNewCode, group = '', addName }) {
+function JoinForm({ codes, addNewCode, group = '', addName, created }) {
   const [ user, setUser ] = useState('')
   const [ groupCode, setGroupCode ] = useState('')
   const [ errors, setErrors ] = useState([])
@@ -48,6 +48,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
               ?
             </span>
           </Link>
+          {created && <p className='created-msg'> Group Succesfuly Created!</p>}
           {errors.length > 1 && <p className='error'>{errors.join(', ')} are required fields</p>}
           {errors.length === 1 && <p className='error'>{errors.join(', ')} is a required field</p>}
           <section className='input-container'>
@@ -101,6 +102,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
 const mapStateToProps = (state, ownProps) => ({
   codes: state.codes,
   group: state.groupCode || ownProps.groupCode,
+  created: state.groupCode && true
 })
 
 const mapDispatchToProps = dispatch => ({
