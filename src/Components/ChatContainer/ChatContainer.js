@@ -19,14 +19,18 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   const messagesEndRef = React.createRef()
 
-  const getMessages = msg => {
+  const displayMessages = (msg) => {
     messages.push(msg)
-    setMessages([...messages])
+    setMessages([...messages]); 
+  }
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   useEffect(() => {
     socket.on("message",function(msg) {  
-      getMessages(msg); 
+      displayMessages(msg); 
       socket.emit('received', true);
     });
 
