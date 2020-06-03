@@ -32,8 +32,14 @@ const ChatDisplay = React.forwardRef(({ messages, group, userTwo, sid, setFilter
           <input type='checkbox' checked={filterOn} onChange={()=>{setFilterStatus(!filterOn)}} id="profanity-box" />
         </section>
       }
-      { userTwo && <ul> {displayMessages()} </ul> }
-      <div className='empty-space' ref={ref} />
+      { userTwo &&
+        <ul>
+          {displayMessages()}
+          <li className='empty-space' ref={ref} />
+        </ul>
+      }
+      {!userTwo && <div className='empty-space' ref={ref} />}
+
     </section>
   );
 })
