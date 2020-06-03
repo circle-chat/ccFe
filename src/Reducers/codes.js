@@ -10,6 +10,8 @@ export const codes = (state = [], action) => {
       }
     case 'GRAB_LOCAL_CODES':
       return action.codes;
+    case 'LEAVE_CHAT':
+      return [];
     default:
       return state
   }

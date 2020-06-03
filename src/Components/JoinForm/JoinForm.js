@@ -4,44 +4,77 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCode, addName } from './../../Actions';
 
-function JoinForm({ codes, addNewCode, room, addName }) {
+function JoinForm({ codes, addNewCode, group = '', addName, created }) {
   const [ user, setUser ] = useState('')
-  const [ roomCode, setRoomCode ] = useState(room)
+  const [ groupCode, setGroupCode ] = useState('')
+  const [ errors, setErrors ] = useState([])
 
   const saveMyCodes = () => {
     addName(user)
-    addNewCode(roomCode)
-    if ( !codes.includes(roomCode)) {
-      window.localStorage.setItem('codes', JSON.stringify( [roomCode, ...codes] ))
+    addNewCode(groupCode)
+    if ( !codes.includes(groupCode)) {
+      window.localStorage.setItem('codes', JSON.stringify( [groupCode, ...codes] ))
+    }
+  }
+
+  const handleBlur = (e) => {
+    let error = e.target.placeholder
+    if (!e.target.value && !errors.includes(error)) {
+      setErrors([...errors, error])
+    } else {
+      setErrors(errors.filter(err => err !== error))
     }
   }
 
   const createOptions = () => {
-    return codes.map(code => (<option key={code} value={ code }/>))
+    return codes.map(code => (<option key={ code } value={ code }/>))
   }
 
+  const handleEnter = (e) => {
+    e.preventDefault()
+    if (e.keyCode === 13 && user && groupCode) {
+       window.location.pathname = '/group'
+    }
+  }
+
+  useEffect(() => {
+    setGroupCode(group)
+  },[group])
+
     return (
-        <form className="JoinForm">
+        <form onSubmit={e => handleEnter(e)} className="JoinForm">
+          <Link className='back-button' to='/about'>
+            <span data-tooltip="Click to Learn About The Circle">
+              ?
+            </span>
+          </Link>
+          {created && <p className='created-msg'> Group Succesfully Created!</p>}
+          {errors.length > 1 && <p className='error'>{errors.join(', ')} are required fields</p>}
+          {errors.length === 1 && <p className='error'>{errors.join(', ')} is a required field</p>}
           <section className='input-container'>
-            <label htmlFor='name-input'>Name:
+            <label htmlFor='name-input'>*Name:
             </label>
             <input
             id='name-input'
             type='text'
             placeholder='Name'
             value={ user }
+            onKeyUp={ (e) => { handleEnter(e) } }
+            onBlur={(e)=> handleBlur(e)}
             onChange={(e) => { setUser(e.target.value) }}
             />
           </section>
           <section className='input-container'>
-            <label htmlFor='code-input'>Group Code:
+            <label htmlFor='code-input'>*Group Code:
             </label>
             <input
             id='code-input'
             list='codes'
             placeholder='Group Code'
-            value={ roomCode }
-            onChange={(e) => { setRoomCode(e.target.value) }}
+            value={ groupCode }
+            onKeyUp={ (e) => { handleEnter(e) } }
+            onBlur={(e)=> handleBlur(e)}
+            onChange={(e) => { setGroupCode(e.target.value) }}
             />
           <datalist id='codes'>
             {createOptions()}
@@ -49,13 +82,13 @@ function JoinForm({ codes, addNewCode, room, addName }) {
           </section>
           <section className='button-box'>
             <Link to='/create'>
-              <button>
+              <button type='button'>
               Create Group
               </button>
             </Link>
-            <Link to='/chat'>
+            <Link to='/group'>
               <button
-                disabled={ !(user && roomCode)}
+                disabled={ !(user && groupCode)}
                 onClick={saveMyCodes}
               >
               Chat!
@@ -66,9 +99,10 @@ function JoinForm({ codes, addNewCode, room, addName }) {
     );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   codes: state.codes,
-  room: state.roomCode
+  group: state.groupCode || ownProps.groupCode,
+  created: state.groupCode && true
 })
 
 const mapDispatchToProps = dispatch => ({

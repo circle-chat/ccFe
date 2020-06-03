@@ -3,17 +3,17 @@ import './ChatForm.css';
 import uniqid from 'uniqid';
 
 
-function ChatForm({ socket, setError, roomCode, name }) {
-  const [ message, setMessage ] = useState('')
+function ChatForm({ socket, setError, roomCode, name, sid }) {
+  const [ message, setMessage ] = useState('');
 
   const handleClick = e => {
-    e.preventDefault()
+    e.preventDefault();
     if (message) {
-      socket.emit('message', {message, id: uniqid(), room: roomCode, sender_name: name})
-      setMessage('')
-      setError('')
+      socket.emit('message', {message, sid, id: uniqid(), room: roomCode, sender_name: name});
+      setMessage('');
+      setError('');
     } else {
-      setError('message must contain text')
+      setError('message must contain text');
     }
   }
 
@@ -21,7 +21,7 @@ function ChatForm({ socket, setError, roomCode, name }) {
     return (
       <section className="ChatForm">
         <form>
-          <section className="InputContainer">
+          <section className="InputContainer chat-input">
             <input
               id='message-input'
               type='text'

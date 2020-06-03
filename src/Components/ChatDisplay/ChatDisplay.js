@@ -1,19 +1,19 @@
-import React, { useState, useEffect, Component } from 'react';
+import React from 'react';
 import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
-function ChatDisplay({ messages, group, userTwo }) {
-
+const ChatDisplay = React.forwardRef(({ messages, group, userTwo, sid }, ref) => {
   const displayMessages = () => {
     return messages.map(message => {
+      const isMe = message.sid !== sid ? 'user-one' : 'user-two'
       return (
-        <li key={message.id}>
-          <div>
+        <li className={`message ${isMe}`} key={message.id}>
+          <p className='sender'>
             {message.sender_name}
-          </div>
-          <div>
+          </p>
+          <p className='text'>
             {message.message}
-          </div>
+          </p>
         </li>
       )
     })
@@ -22,10 +22,11 @@ function ChatDisplay({ messages, group, userTwo }) {
   return (
     <section className="ChatDisplay">
       { !userTwo && <Participant group={ group } waiting={ true } /> }
-      { userTwo && <Participant group={ group } userTwo={ userTwo } waiting={ false } /> }
+      { userTwo && <Participant group={ group } userTwo={ userTwo.name } waiting={ false } /> }
       { userTwo && <ul> {displayMessages()} </ul> }
+      <div className='empty-space' ref={ref} />
     </section>
   );
-}
+})
 
 export default ChatDisplay;

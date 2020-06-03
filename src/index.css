@@ -24,15 +24,27 @@ main {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Slabo 27px", sans-serif;
+  font-weight: normal;
+  color: #2d2768;
+  letter-spacing: 0.05rem;
 }
 
 button {
   cursor: pointer;
-  background-color: #207094;
+  background-color: #ebeaea;
   border: 0;
+  border: 2px solid rgba(45, 39, 104, 0.5);
 }
 
 button:disabled {
   opacity: 0.8;
   cursor: not-allowed;
+}
+
+input,
+textarea {
+  padding: 0 3%;
+  border: 2px #ebeaea solid;
+  border-radius: 10px;
 }

@@ -1,0 +1,48 @@
+.ChatDisplay {
+  width: inherit;
+  height: 70%;
+  margin: 1.25% auto;
+  margin-top: 11%;
+  overflow-x: scroll;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ChatDisplay ul {
+  width: 100%;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  margin: 1% 0;
+  flex-direction: column-reverse;
+}
+
+.sender {
+  font-size: 0.8rem;
+  margin: 0.1rem 0.75rem 0;
+  text-transform: capitalize;
+}
+
+.sender::before,
+.sender::after {
+  content: "○";
+}
+
+.text {
+  font-size: 1rem;
+  max-width: 25rem;
+  border-radius: 20px;
+  background-color: rgba(138, 113, 192, 0.5);
+  border: 2px solid rgba(45, 39, 104, 0.33);
+  padding: 0.1rem 1rem;
+}
+
+.user-one {
+  align-items: flex-start;
+}
+
+.user-two {
+  align-items: flex-end;
+}
