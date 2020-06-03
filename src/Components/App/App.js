@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
 import RoomForm from '../RoomForm/RoomForm.js';
@@ -25,9 +25,6 @@ function App({ grabLocalCodes }) {
 
   useLayoutEffect(() => {
     storeMyCodes()
-    let landing = window.location.pathname === '/' ?
-    'main-page' : 'not-main'
-    setLocation(landing)
   },[])
 
   history.listen((location) => {

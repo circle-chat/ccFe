@@ -1,7 +1,6 @@
 import React from "react";
 import JoinForm from "./JoinForm";
-import io from "socket.io-client";
-import { render, waitFor, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -62,7 +61,7 @@ describe("<JoinForm />", () => {
   })
 
   it('chat disabled if form is not filled out', () => {
-    const { getByText, getByPlaceholderText } = renderJoinForm()
+    const { getByText } = renderJoinForm()
 
 
     const chatButton = getByText('Chat!')

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React from 'react';
 import './Participant.css';
 import LoadingBalls from './../LoadingBalls/LoadingBalls.js'
 
@@ -9,19 +9,19 @@ function Participant({ waiting, userTwo, group }) {
       <section>
         <h3>Circle Code: { group }</h3>
         { message }
-        <h3>{ userTwo }</h3>
+        <h3 className='user-two'>{ userTwo }</h3>
       </section>
     )
   }
 
   const waitingMessage = (
-    <section className='waiting-message'>
+    <section className='waiting-message '>
       <h3>Waiting to Connect</h3>
       <LoadingBalls />
     </section>
   )
 
-  const connectedMessage = <h3>Connected With:</h3>
+  const connectedMessage = <h3 className='in-message'>Connected With:</h3>
 
   return (
     <section className="Participant">

@@ -10,15 +10,13 @@ import { postGroup } from './../../APICalls.js'
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
-  const [ potentialRule, setRule ] = useState('')
-  const [ roomID, setroomID ] = useState(uniqid())
+  const [ potentialRule, setRule ] = useState('')``
   const [ description, setDescription ] = useState('')
 
   const messagesEndRef = React.createRef()
 
   const storeCode = async () => {
     const data = await postGroup( groupName, rules, description )
-    console.log(data);
     getCircleCode(data.access_code)
   }
 

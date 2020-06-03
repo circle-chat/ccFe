@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React from 'react';
 import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
