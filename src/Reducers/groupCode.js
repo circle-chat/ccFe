@@ -4,6 +4,8 @@ export const groupCode = (state = '', action) => {
         return action.code
     case 'SET_CODE':
         return action.code
+    case 'LEAVE_CHAT':
+        return ''
     default:
       return state
   }

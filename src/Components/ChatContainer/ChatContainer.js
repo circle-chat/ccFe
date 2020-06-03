@@ -4,19 +4,18 @@ import ChatForm from './../ChatForm/ChatForm.js'
 import ChatDisplay from './../ChatDisplay/ChatDisplay.js'
 import io from 'socket.io-client';   
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
-import { addRoomCode } from '../../Actions/index.js'
+import { Redirect, Link } from 'react-router-dom';
+import { addRoomCode, leaveChat } from '../../Actions/index.js'
+import uniqid from 'uniqid'
+const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app"
 
-
-
-const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app";  
-
-function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
+function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const [sid, setSid] = useState('');
   const [roomDetails, setRoomDetails] = useState( { match: null } );
+  const [url, setUrl] = useState(window.location.pathname)
 
   const messagesEndRef = React.createRef()
 
@@ -27,6 +26,31 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const leaveChat = () => {
+    socket.disconnect();
+    socket.emit('leave_room')
+  }
+
+  const handleLeave = (e) => {
+    if (url === window.location.pathname) {
+      setUrl('/')
+      console.log(e.target.dataset.tooltip);
+      e.target.dataset.tooltip = 'Click Again to Confirm Leave'
+    } else {
+      socket.emit('message', {message:`${name} left the chat`, sid, id: uniqid(), room: roomCode, sender_name: name});
+      leaveChat()
+      leaveChatRoom()
+    }
+  }
+
+  const handleStay = (e) => {
+    if (e.target.id !== 'leave-chat') {
+      setUrl(window.location.pathname)
+      const leaveBtn = document.getElementById('leave-chat')
+      leaveBtn.dataset.tooltip = 'Click to Leave'
+    }
   }
 
   useEffect(() => {
@@ -48,9 +72,10 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
       addRoomCode(roomDetails.room)
       setRoomDetails(roomDetails);
       socket.emit('received', true);
-      // setSid(group.sid)
     });
   },[]);
+
+
 
   useEffect(() => {
     if (groupCode && !roomCode) {
@@ -60,15 +85,11 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
     socket.on('connect', (stuff) => {
       console.log('Successfully connected!');
       setSid(socket.id)
-      console.log(sid);
     });
-
-    const leaveChat = () => {
-      socket.disconnect();
-    }
+    window.addEventListener('click', handleStay)
 
     return () => {
-      socket.emit('leave_room')
+      window.removeEventListener('click', handleStay)
       leaveChat()
     }
   }, []) 
@@ -78,6 +99,11 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   return (
     <section className="ChatContainer">
+      <Link className='back-button' to={url}>
+        <button id='leave-chat' onClick={(e) => {handleLeave(e)}}data-tooltip="Click to leave">
+          ＜
+        </button>
+      </Link>
       <ChatDisplay
         ref={messagesEndRef}
         userTwo={ roomDetails.match }
@@ -107,6 +133,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addRoomCode: code => dispatch(addRoomCode(code)),
+  leaveChatRoom: () => dispatch(leaveChat()),
 });
 
 

@@ -22,3 +22,7 @@ export const grabLocalCodes = codes => ({
   type: 'GRAB_LOCAL_CODES',
   codes
 })
+
+export const leaveChat = () => ({
+  type: 'LEAVE_CHAT',
+})

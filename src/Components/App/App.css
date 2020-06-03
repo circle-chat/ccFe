@@ -113,7 +113,8 @@ form label {
   padding: 3%;
 }
 
-.back-button span {
+.back-button span,
+.back-button button {
   background: none;
   border: none;
   font-size: 1.5rem;
