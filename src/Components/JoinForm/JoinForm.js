@@ -30,16 +30,23 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
     return codes.map(code => (<option key={ code } value={ code }/>))
   }
 
+  const handleEnter = (e) => {
+    e.preventDefault()
+    if (e.keyCode === 13 && user && groupCode) {
+       window.location.pathname = '/group'
+    }
+  }
+
   useEffect(() => {
     setGroupCode(group)
   },[group])
 
     return (
-        <form className="JoinForm">
+        <form onSubmit={e => handleEnter(e)} className="JoinForm">
           <Link className='back-button' to='/about'>
-            <button data-tooltip="Click to Learn About The Circle">
+            <span data-tooltip="Click to Learn About The Circle">
               ?
-            </button>
+            </span>
           </Link>
           {errors.length > 1 && <p className='error'>{errors.join(', ')} are required fields</p>}
           {errors.length === 1 && <p className='error'>{errors.join(', ')} is a required field</p>}
@@ -51,6 +58,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
             type='text'
             placeholder='Name'
             value={ user }
+            onKeyUp={ (e) => { handleEnter(e) } }
             onBlur={(e)=> handleBlur(e)}
             onChange={(e) => { setUser(e.target.value) }}
             />
@@ -63,6 +71,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
             list='codes'
             placeholder='Group Code'
             value={ groupCode }
+            onKeyUp={ (e) => { handleEnter(e) } }
             onBlur={(e)=> handleBlur(e)}
             onChange={(e) => { setGroupCode(e.target.value) }}
             />
@@ -72,7 +81,7 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
           </section>
           <section className='button-box'>
             <Link to='/create'>
-              <button>
+              <button type='button'>
               Create Group
               </button>
             </Link>

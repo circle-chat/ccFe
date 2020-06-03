@@ -121,7 +121,7 @@ function RoomForm({getCircleCode}) {
           </Link>
           <Link to='/'>
             <button
-              disabled={ !groupName }
+              disabled={ !groupName && !description }
               type='button'
               onClick={ storeCode }
             >
