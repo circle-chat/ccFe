@@ -5,7 +5,7 @@ import { render, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
 import { addNewCode, addRoomCode, addName } from './../../Actions';
-
+import { MemoryRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../reducers';
@@ -20,9 +20,11 @@ const testStore = createStore(rootReducer);
 
 function renderChatContainer() {
   return render(
-    <Provider store={testStore}>
+    <Router>
+      <Provider store={testStore}>
         <ChatContainer />
-    </Provider>
+      </Provider>
+    </Router>
   )
 }
 
@@ -102,7 +104,7 @@ describe("<ChatContainer />", () => {
     socket.on('received', function (received) {
         expect(received).toBe(true);
     });
-    
+
     const message = getByText('Test')
     expect(message).toBeInTheDocument();
 

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { addRoomCode, leaveChat } from '../../Actions/index.js'
 import uniqid from 'uniqid'
+
 const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app"
 
 function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }) {
@@ -36,7 +37,6 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
   const handleLeave = (e) => {
     if (url === window.location.pathname) {
       setUrl('/')
-      console.log(e.target.dataset.tooltip);
       e.target.dataset.tooltip = 'Click Again to Confirm Leave'
     } else {
       socket.emit('message', {message:`${name} left the chat`, sid, id: uniqid(), room: roomCode, sender_name: name});

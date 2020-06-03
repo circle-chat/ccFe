@@ -3,10 +3,8 @@ import './ChatDisplay.css';
 import Participant from './../Participant/Participant.js'
 
 const ChatDisplay = React.forwardRef(({ messages, group, userTwo, sid }, ref) => {
-  // console.log(userTwo, sid);
   const displayMessages = () => {
     return messages.map(message => {
-      console.log(message.sid, sid);
       const isMe = message.sid !== sid ? 'user-one' : 'user-two'
       return (
         <li className={`message ${isMe}`} key={message.id}>
