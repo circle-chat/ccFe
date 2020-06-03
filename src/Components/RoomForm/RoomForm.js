@@ -93,6 +93,7 @@ function RoomForm({getCircleCode}) {
           placeholder='This Group is For...'
           rows="2"
           cols="50"
+          maxLength={100}
           value={ description }
           onChange={(e) => { setDescription(e.target.value) }}
           />

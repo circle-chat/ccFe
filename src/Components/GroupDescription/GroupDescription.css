@@ -1,6 +1,7 @@
 .GroupDescription {
   margin: auto;
   width: 60%;
+  min-width: 430px;
   max-height: 80%;
   min-height: 50%;
   display: flex;
