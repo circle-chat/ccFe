@@ -14,6 +14,7 @@ function ChatContainer({ groupCode, roomCode, name }) {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const [roomDetails, setRoomDetails] = useState( { user_two: null } );
+  const [filterStatus, setFilterStatus] = useState( true )
 
 
 
@@ -44,9 +45,9 @@ function ChatContainer({ groupCode, roomCode, name }) {
 
   return (
     <section className="ChatContainer">
-      <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } />
+      <ChatDisplay userTwo={ roomDetails.user_two } group={ groupCode } messages={ messages } filterOn={ filterStatus } setFilterStatus={ setFilterStatus }/>
       {error && <p>{ error }</p>}
-      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } socket={ socket } /> }
+      { roomDetails.user_two && <ChatForm name={name} roomCode={ roomCode } setError={ setError } socket={ socket } filterOn={ filterStatus }/> }
       { !groupCode && <Redirect to='/' /> }
     </section>
   );
