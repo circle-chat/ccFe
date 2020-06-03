@@ -3,7 +3,6 @@ import ChatForm from "./ChatForm";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
-<<<<<<< HEAD
 import { addNewCode, addRoomCode } from './../../Actions';
 import uniqid from 'uniqid';
 import { Provider } from 'react-redux';
@@ -12,11 +11,6 @@ import rootReducer from '../../reducers';
 
 
 const testStore = createStore(rootReducer);
-=======
-import uniqid from 'uniqid';
-
-jest.mock('uniqid')
->>>>>>> 95c8a400091f3171b767752e6c44ae3dfa1fa1eb
 
 jest.mock('uniqid')
 
@@ -30,12 +24,8 @@ function renderChatForm(filterStatus = true) {
           socket={socket}
           roomCode={'test-code'}
           setError={mockSetError}
-<<<<<<< HEAD
           name={'jennyfromtheblock'}
           filterOn={filterStatus}
-=======
-          name={'alan'}
->>>>>>> 95c8a400091f3171b767752e6c44ae3dfa1fa1eb
         />
   )
 }
@@ -53,12 +43,11 @@ describe("<ChatForm />", () => {
     fireEvent.click(messageSend)
 
     expect(socket.emit).toHaveBeenCalled()
-<<<<<<< HEAD
     expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', room:'test-code', sender_name:'jennyfromtheblock', id: '12345id'})
 
   });
-
-  it.only("User is censored when profanity is used", () => {
+ 
+  it("User is censored when profanity is used", () => {
     const { getByText, getByPlaceholderText } = renderChatForm()
 
     const messageInput = getByPlaceholderText('Type a message here...')
@@ -83,10 +72,6 @@ describe("<ChatForm />", () => {
 
     expect(socket.emit).toHaveBeenCalled()
     expect(socket.emit).toHaveBeenCalledWith('message', {message:'You are a shit-stained fuck-ass', room:'test-code', sender_name:'jennyfromtheblock', id: '12345id'})
-
-=======
-    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', sender_name: "alan", room:'test-code', "id": "12345id"})
->>>>>>> 95c8a400091f3171b767752e6c44ae3dfa1fa1eb
   });
 
   it("Error is set on blocked input", () => {
