@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 import './App.css';
 import JoinForm from '../JoinForm/JoinForm.js';
+import AboutApp from '../AboutApp/AboutApp.js';
 import RoomForm from '../RoomForm/RoomForm.js';
 import GroupDescription from '../GroupDescription/GroupDescription.js';
 import ChatContainer from '../ChatContainer/ChatContainer.js';
@@ -65,6 +66,9 @@ function App({ grabLocalCodes }) {
       />
       <Route path='/create'>
         <RoomForm />
+      </Route>
+      <Route path='/about'>
+        <AboutApp />
       </Route>
       <Route path='/group'>
         <GroupDescription />

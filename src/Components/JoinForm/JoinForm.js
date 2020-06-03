@@ -26,6 +26,11 @@ function JoinForm({ codes, addNewCode, group = '', addName }) {
 
     return (
         <form className="JoinForm">
+          <Link className='back-button' to='/about'>
+            <button data-tooltip="Click to Learn About The Circle">
+              ?
+            </button>
+          </Link>
           <section className='input-container'>
             <label htmlFor='name-input'>Name:
             </label>
