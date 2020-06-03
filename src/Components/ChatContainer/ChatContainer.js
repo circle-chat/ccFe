@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatContainer.css';
 import ChatForm from './../ChatForm/ChatForm.js'
 import ChatDisplay from './../ChatDisplay/ChatDisplay.js'
@@ -15,6 +15,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const socket = io.connect(`${endPoint}`);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
+  const [sid, setSid] = useState('');
   const [roomDetails, setRoomDetails] = useState( { match: null } );
 
   const messagesEndRef = React.createRef()
@@ -49,15 +50,14 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
 
   useEffect(() => {
     socket.on('join_group', function(group) {
-      console.log(group);
+      setSid(group.sid)
     });
   },[])
 
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (groupCode && !roomCode) {
       socket.emit('join_group', {'access_code': groupCode, 'name': name});
-      // console.log({'access_code': groupCode, 'user_name': name});
     }
 
     socket.on('connect', (stuff) => {
@@ -83,6 +83,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
         ref={messagesEndRef}
         userTwo={ roomDetails.match }
         group={ groupCode }
+        sid={sid}
         messages={ messages }
       />
       {error && <p className='error'>{ error }</p>}
