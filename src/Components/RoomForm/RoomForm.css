@@ -1,15 +1,24 @@
 .RoomForm {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 2%;
-  width: 40%;
-  height: 60%;
+  width: 50%;
+  min-width: 430px;
+  height: 80%;
   margin: auto;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
-.RoomForm input {
+.RoomForm input,
+.RoomForm textarea {
   font-size: 1.5rem;
+}
+
+.RoomForm textarea {
+  overflow-x: scroll;
 }
 
 .RoomForm .button-box {
@@ -22,20 +31,22 @@
 
 .rules-input input {
   width: 90%;
+  border-radius: 0 0 0 20px;
 }
 
 .rules-input button {
   width: 10%;
   font-size: 1.5rem;
-  border: solid #207094;
-  border-radius: 0 5px 5px 0;
+  border: 2px solid #ebeaea;
+  border-radius: 0 0 20px 0;
 }
 
 .rules-head {
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
-  font-weight: 700;
+  background: white;
+  border-radius: 20px 20px 0 0;
 }
 
 .rule {
@@ -57,10 +68,17 @@
   height: 40%;
   overflow-y: scroll;
   background-color: white;
-  border-radius: 20px;
   padding: 2% 3%;
 }
 
 .empty-space {
   height: 1.5rem;
+}
+
+#cancel {
+  background-color: white;
+}
+
+.RoomForm .cancel:hover {
+  transform: scale(1);
 }

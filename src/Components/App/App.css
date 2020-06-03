@@ -1,10 +1,14 @@
-/* #8A71C0 #3D348B #FB3640 #B0AFAF #207094 */
+/* #8A71C0 #2D2768 #FB3640 #EBEAEA #58B1DA */
+
+/* font-family: 'Bungee Shade', cursive;
+font-family: 'Slabo 27px', serif;
+font-family: 'Montserrat', sans-serif; */
 
 .App {
   display: flex;
-  padding: 3% 1%;
+  padding: 3% 1% 1.5%;
   align-items: center;
-  background-color: #8a71c0;
+  background-color: #ebeaea;
   flex-direction: column;
 }
 
@@ -14,11 +18,23 @@ header {
   justify-content: center;
   align-items: center;
   font-size: 3rem;
+  padding: 0 3%;
+}
+
+header h1 {
+  font-family: "Bungee Shade", cursive;
+  font-weight: 400;
 }
 
 form {
-  background-color: #b0afaf;
+  background-color: #8a71c0;
   border-radius: 20px;
+  border: solid 2px #2d2768;
+}
+
+form label {
+  font-family: "Montserrat", serif;
+  text-transform: uppercase;
 }
 
 form label {
@@ -35,11 +51,12 @@ form label {
 }
 
 .button-box button {
-  height: 50px;
-  width: 100px;
+  height: 30px;
+  width: 145px;
   font-size: 1rem;
   border-radius: 20px;
   font-weight: bold;
+  background-color: #58b1da;
 }
 
 .button-box button:hover {
@@ -52,6 +69,10 @@ form label {
 
 .button-box button:disabled:hover {
   transform: scale(1);
+}
+
+.button-box button:disabled {
+  background-color: #ebeaea;
 }
 
 .button-box {
@@ -76,16 +97,65 @@ form label {
   z-index: 1;
 }
 
+.back-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 1%;
+  top: 2%;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(45, 39, 104, 0.33);
+  border-radius: 100%;
+  text-decoration: none;
+  padding: 3%;
+}
+
+.back-button span,
+.back-button button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+
 .dash-circle {
   position: absolute;
   top: 0;
   z-index: 0;
   width: 100%;
   height: 100%;
-  border-radius: 180px;
-  border: dashed 2px black;
+  border-radius: 100%;
+  border: dashed 2px #3d348b;
   -webkit-animation: rotate-center 10s linear infinite both;
   animation: rotate-center 10s linear infinite both;
+}
+
+.not-main header {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.not-main header .logo-box {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.not-main header h1 {
+  font-size: 1em;
+}
+
+.not-main {
+  background-image: url("/assets/back-ground-vec-low-op.svg");
+  background-size: 100%;
+}
+
+.main-page {
+  background-image: url("/assets/back-ground-vec.svg");
+  background-size: 270% 270%;
+  background-position: bottom;
 }
 
 @-webkit-keyframes rotate-center {
@@ -106,5 +176,34 @@ form label {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 800px) {
+  header * {
+    font-size: 5rem;
+  }
+
+  header {
+    width: 100vw;
+  }
+
+  .logo-box {
+    margin-left: -20px;
+  }
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header * {
+    font-size: 4rem;
+  }
+
+  .logo-box {
+    margin-left: 0px;
   }
 }

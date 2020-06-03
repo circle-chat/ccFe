@@ -1,11 +1,18 @@
 .JoinForm {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  padding: 2%;
-  width: 40%;
-  height: 30%;
+  justify-content: space-between;
+  padding: 4%;
+  width: 45%;
+  min-width: 430px;
+  min-height: 35%;
+  max-height: 50%;
   margin: auto;
+  margin-top: 5%;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .JoinForm input {
@@ -14,4 +21,15 @@
 
 .JoinForm .button-box {
   height: 25%;
+}
+
+.created-msg {
+  position: absolute;
+  font-size: 1.25rem;
+  bottom: 9%;
+  left: 5%;
+}
+
+form .error {
+  color: inherit;
 }
