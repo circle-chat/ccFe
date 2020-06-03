@@ -27,12 +27,15 @@ function App({ grabLocalCodes }) {
     }
 
     storeMyCodes()
-  },[])
-
-  history.listen((location) => {
     let IsJoin = window.location.pathname === '/'
     let IsAlsoJoin = window.location.pathname.includes('join')
     let landing = IsJoin || IsAlsoJoin ?
+    'main-page' : 'not-main'
+    setLocation(landing)
+  },[])
+
+  history.listen((location) => {
+    let landing = window.location.pathname === '/' ?
     'main-page' : 'not-main'
     setLocation(landing)
   })

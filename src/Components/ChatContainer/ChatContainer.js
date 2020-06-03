@@ -22,7 +22,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
   const getMessages = msg => {
     messages.push(msg)
     setMessages([...messages])
-
+  }
 
   useEffect(() => {
     socket.on("message",function(msg) {  
@@ -35,12 +35,12 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
     }
 
     scrollToBottom()
-  },[messages, messages.length, messagesEndRef, socket]);
+  },[messages.length]);
 
   useEffect(() => {
-    socket.on("join_room",function(room) {  
-      addRoomCode(room)
-      setRoomDetails({user_two: 'test user'});
+    socket.on("join_room",function(roomDetails) {  
+      addRoomCode(roomDetails.room)
+      setRoomDetails(roomDetails);
       socket.emit('received', true);
     });
   });

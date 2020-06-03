@@ -32,6 +32,8 @@ function renderRoomForm() {
 describe("<RoomForm />", () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
   postGroup.mockResolvedValue({ access_code: '1234' })
+  uniqid.mockReturnValue('12345id')
+
   it('Renders the form', () => {
     const { getByText, getByPlaceholderText } = renderRoomForm()
 
@@ -49,7 +51,7 @@ describe("<RoomForm />", () => {
   })
 
   it('Can add a rule', () => {
-    const { getByText, getByPlaceholderText } = renderRoomForm()
+    const { getByText, getByPlaceholderText, debug } = renderRoomForm()
 
     const nameInput = getByPlaceholderText('Name')
     const ruleInput = getByPlaceholderText('Rule')
@@ -61,14 +63,12 @@ describe("<RoomForm />", () => {
     fireEvent.click(plusButton)
 
     const expected = getByText('Test-Rule')
-
+    debug()
     expect(expected).toBeInTheDocument()
   })
 
   it('chat disabled if form is not filled out', () => {
     const { getByText, debug, getByPlaceholderText } = renderRoomForm()
-
-    uniqid.mockReturnValue('12345id')
 
     const createButton = getByText('Create Group')
     const ruleInput = getByPlaceholderText('Rule')

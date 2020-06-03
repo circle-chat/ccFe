@@ -10,7 +10,7 @@ import { postGroup } from './../../APICalls.js'
 function RoomForm({getCircleCode}) {
   const [ groupName, setRoomname ] = useState('')
   const [ rules, handleRules ] = useState([])
-  const [ potentialRule, setRule ] = useState('')``
+  const [ potentialRule, setRule ] = useState('')
   const [ description, setDescription ] = useState('')
 
   const messagesEndRef = React.createRef()
@@ -21,7 +21,7 @@ function RoomForm({getCircleCode}) {
       getCircleCode(data.access_code)
     } catch (err) {
       console.log(err);
-    } 
+    }
   }
 
   const scrollToBottom = () => {
