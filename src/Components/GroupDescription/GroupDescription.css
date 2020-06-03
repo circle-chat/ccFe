@@ -50,3 +50,15 @@
   max-height: 10rem;
   overflow-x: scroll;
 }
+
+.waiting-for-group {
+  display: flex;
+  align-items: baseline;
+  transform: scale(1.5);
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+
+.waiting-for-group .loader {
+  width: 50px;
+}

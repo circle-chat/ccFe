@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './GroupDescription.css';
+import LoadingBalls from '../LoadingBalls/LoadingBalls.js'
 import { getGroup } from './../../APICalls.js'
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -46,6 +47,18 @@ const GroupDescription = ({groupCode}) => {
     }
     fetchGroup()
   },[])
+
+  if (!group.name) {
+    return (
+    <section className='GroupDescription'>
+      {url && <Redirect to={url}/>}
+      <section className='waiting-for-group'>
+        <h2>Locating your Circle</h2>
+        <LoadingBalls />
+      </section>
+    </section>
+  )
+  }
 
   return (
     <section className='GroupDescription'>
