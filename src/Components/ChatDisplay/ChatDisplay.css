@@ -1,6 +1,6 @@
 .ChatDisplay {
   width: inherit;
-  height: 70%;
+  height: 60%;
   margin: 1.25% auto;
   margin-top: 11%;
   overflow-x: scroll;
@@ -10,6 +10,7 @@
 
 .ChatDisplay ul {
   width: 100%;
+  min-height: 90%;
 }
 
 .message {
