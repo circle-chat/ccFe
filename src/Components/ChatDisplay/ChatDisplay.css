@@ -2,4 +2,23 @@
   width: inherit;
   height: 87%;
   margin: 1.25% auto;
+  overflow-x: scroll;
+}
+
+.message {
+  display: flex;
+  font-size: 1rem;
+}
+
+.text {
+  margin-left: 1%;
+  width: 25rem;
+}
+
+.user-one {
+  justify-content: flex-start;
+}
+
+.user-two {
+  justify-content: flex-end;
 }
