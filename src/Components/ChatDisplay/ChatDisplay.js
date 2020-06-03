@@ -23,8 +23,14 @@ const ChatDisplay = React.forwardRef(({ messages, group, userTwo, sid }, ref) =>
     <section className="ChatDisplay">
       { !userTwo && <Participant group={ group } waiting={ true } /> }
       { userTwo && <Participant group={ group } userTwo={ userTwo.name } waiting={ false } /> }
-      { userTwo && <ul> {displayMessages()} </ul> }
-      <div className='empty-space' ref={ref} />
+      { userTwo &&
+        <ul>
+          {displayMessages()}
+          <li className='empty-space' ref={ref} />
+        </ul>
+      }
+      {!userTwo && <div className='empty-space' ref={ref} />}
+
     </section>
   );
 })
