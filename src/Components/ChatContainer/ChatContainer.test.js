@@ -101,8 +101,8 @@ describe("<ChatContainer />", () => {
     fireEvent.change(messageInput, { target: { value: 'Test' } })
     fireEvent.click(messageSend)
 
-    socket.on('recived', function (recived) {
-        expect(recived).toBe(true);
+    socket.on('received', function (received) {
+        expect(received).toBe(true);
     });
     const message = await waitFor(() => getByText('Test'))
 
