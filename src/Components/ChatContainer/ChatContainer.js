@@ -30,51 +30,55 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode }) {
       socket.emit('received', true);
     });
 
-    const scrollToBottom = () => {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
 
     scrollToBottom()
   },[messages.length]);
 
   useEffect(() => {
     socket.on("join_room",function(roomDetails) {  
-      console.log(roomDetails);
       addRoomCode(roomDetails.room)
       setRoomDetails(roomDetails);
       socket.emit('received', true);
     });
-  });
+  },[]);
 
   useEffect(() => {
     socket.on('join_group', function(group) {
       console.log(group);
     });
-  },[socket])
+  },[])
 
 
   useLayoutEffect(() => {
-    if (groupCode) {
+    if (groupCode && !roomCode) {
       socket.emit('join_group', {'access_code': groupCode, 'name': name});
-      console.log({'access_code': groupCode, 'user_name': name});
+      // console.log({'access_code': groupCode, 'user_name': name});
     }
+
     socket.on('connect', (stuff) => {
       console.log('Successfully connected!');
     });
 
     const leaveChat = () => {
-      socket.emit('leave', {room: roomCode});
       socket.disconnect();
     }
 
-    return leaveChat;
-  }, [groupCode, name, roomCode, socket]) 
+    return () => {
+      leaveChat()
+    }
+  }, []) 
+
 
 
 
   return (
     <section className="ChatContainer">
-      <ChatDisplay ref={messagesEndRef} userTwo={ roomDetails.match } group={ groupCode } messages={ messages } />
+      <ChatDisplay
+        ref={messagesEndRef}
+        userTwo={ roomDetails.match }
+        group={ groupCode }
+        messages={ messages }
+      />
       {error && <p className='error'>{ error }</p>}
       { roomDetails.match && <ChatForm
           name={name}
