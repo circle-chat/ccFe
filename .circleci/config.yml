@@ -1,10 +1,10 @@
 orbs:
   react: thefrontside/react@0.2.0
 version: 2.1
+working_directory: ~/ccFe
 workflows:
   push:
     jobs:
-      working_directory: ~/ccFe
       - react/install
       - react/eslint:
           requires:
