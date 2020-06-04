@@ -1,6 +1,7 @@
 .loader {
   border-radius: 100%;
   position: relative;
+  width: 50px;
 }
 
 #loader-4 span {
@@ -8,7 +9,7 @@
   width: 5px;
   height: 5px;
   border-radius: 100%;
-  background-color: black;
+  background-color: #2D2768;
   margin: 0px 5px;
   opacity: 0;
 }

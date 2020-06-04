@@ -1,6 +1,6 @@
 .ChatDisplay {
   width: inherit;
-  height: 60%;
+  height: 58%;
   margin: 1.25% auto;
   margin-top: 11%;
   overflow-x: scroll;
@@ -18,6 +18,26 @@
   justify-content: center;
   margin: 1% 0;
   flex-direction: column-reverse;
+}
+
+#profanity-check {
+  position: absolute;
+  bottom: .25rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  justify-content: space-around;
+}
+
+#profanity-check input:checked::after {
+  content: 'On';
+  /* margin-left: 1rem; */
+}
+
+#profanity-check input::after {
+  content: 'Off';
+  margin-left: 1rem;
 }
 
 .sender {
@@ -46,4 +66,16 @@
 
 .user-two {
   align-items: flex-end;
+}
+
+@media (max-width: 850px) {
+  .ChatDisplay {
+    height: 73%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .ChatDisplay {
+    height: 68%;
+  }
 }

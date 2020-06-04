@@ -43,6 +43,8 @@
   transform: translate(-50%, -50%) scale(2.5);
   border-radius: 20px;
   z-index: 5;
+  min-height: 10rem;
+  min-width: 30rem;
 }
 
 .connected {

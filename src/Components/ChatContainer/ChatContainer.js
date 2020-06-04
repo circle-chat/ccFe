@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { addRoomCode, leaveChat } from '../../Actions/index.js'
 import uniqid from 'uniqid'
+import Filter from 'bad-words';
+
 
 const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app"
 
@@ -17,6 +19,16 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
   const [sid, setSid] = useState('');
   const [roomDetails, setRoomDetails] = useState( { match: null } );
   const [url, setUrl] = useState(window.location.pathname)
+  const [filterStatus, setFilterStatus] = useState( true )
+  const [filter, setFilter] = useState(new Filter({ placeHolder: '🤬' }))
+
+  useEffect(()=>{
+    if (!filterStatus) {
+      setFilter(new Filter({ emptyList:true }))
+    } else {
+      setFilter(new Filter({ placeHolder: '🤬' }))
+    }
+  }, [filterStatus])
 
   const messagesEndRef = React.createRef()
 
@@ -110,6 +122,9 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
         group={ groupCode }
         sid={sid}
         messages={ messages }
+        filter={ filter }
+        filterOn={ filterStatus }
+        setFilterStatus={ setFilterStatus }
       />
       {error && <p className='error'>{ error }</p>}
       { roomDetails.match && <ChatForm
@@ -118,6 +133,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
           roomCode={ roomCode }
           setError={ setError }
           socket={ socket }
+          filter={ filter }
         />
       }
       { !groupCode && <Redirect to='/' /> }
