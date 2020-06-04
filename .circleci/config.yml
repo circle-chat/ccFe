@@ -1,28 +1,16 @@
-version: 2.1
 orbs:
-  node: circleci/node@1.1.6
   react: thefrontside/react@0.2.0
-jobs:
-  build-and-test:
-    working_directory: ~/project
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn test
+version: 2.1
 workflows:
-    build-and-test:
-      jobs:
-        - react/install
-        - react/eslint:
-            requires:
-              - react/install
-        - react/test:
-            requires:
-              - react/install
-        - react/coverage:
-            requires:
-              - react/install
+  push:
+    jobs:
+      - react/install
+      - react/eslint:
+          requires:
+            - react/install
+      - react/test:
+          requires:
+            - react/install
+      - react/coverage:
+          requires:
+            - react/install
