@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNewCode, addName } from './../../Actions';
+import { addNewCode, addName, leaveChat as reset } from './../../Actions';
 
-function JoinForm({ codes, addNewCode, group = '', addName, created }) {
+function JoinForm({ codes, addNewCode, group = '', addName, created, reset, lastPath }) {
   const [ user, setUser ] = useState('')
   const [ groupCode, setGroupCode ] = useState('')
   const [ errors, setErrors ] = useState([])
@@ -39,6 +39,10 @@ function JoinForm({ codes, addNewCode, group = '', addName, created }) {
 
   useEffect(() => {
     setGroupCode(group)
+
+    if (lastPath !== '/create') {
+      reset()
+    }
   },[group])
 
     return (
@@ -107,7 +111,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   addNewCode: code => dispatch(addNewCode(code)),
-  addName: code => dispatch(addName(code))
+  addName: code => dispatch(addName(code)),
+  reset: () => dispatch(reset())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinForm);

@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 
 function App({ grabLocalCodes }) {
   const [location, setLocation] = useState('main-page')
+  const [lastPath, setLastPath] = useState(['/'])
   const history = useHistory()
 
 
@@ -40,6 +41,7 @@ function App({ grabLocalCodes }) {
     let landing = window.location.pathname === '/' ?
     'main-page' : 'not-main'
     setLocation(landing)
+    setLastPath([lastPath[lastPath.length - 1], location.pathname])
   })
 
   return (
@@ -52,7 +54,7 @@ function App({ grabLocalCodes }) {
         <h1>The Circle</h1>
       </header>
       <Route path='/' exact>
-        <JoinForm />
+        <JoinForm lastPath={lastPath[0]}/>
       </Route>
       <Route
         path="/join/:groupCode" exact
