@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from '../../reducers';
+import rootReducer from './../../reducers';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { postGroup } from './../../APICalls.js'
 import uniqid from 'uniqid';

@@ -4,7 +4,7 @@ import App from './App';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from '../../reducers';
+import rootReducer from './../../reducers';
 
 
 const testStore = createStore(rootReducer);
