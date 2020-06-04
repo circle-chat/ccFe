@@ -3,6 +3,9 @@ import ChatDisplay from "./ChatDisplay";
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import uniqid from 'uniqid';
+import Filter from 'bad-words';
+
+const filter = new Filter()
 
 const createMessage = (message) => {
   return { 'message': message, 'sender_name': 'joe', 'id': uniqid() }
@@ -14,6 +17,8 @@ function renderChatDisplay() {
       userTwo={ 'name string' }
       group={ 'code string' }
       messages={ [ createMessage('Test-Message1'), createMessage('Test-Message2'), createMessage('Test-Message3') ] }
+      filter={filter}
+      filterOn={true}
     />
   )
 }
