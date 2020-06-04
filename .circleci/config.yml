@@ -1,8 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+  react: thefrontside/react@0.2.0
 jobs:
-  working_directory: ~/repo
   build-and-test:
     executor:
       name: node/default
@@ -15,4 +15,13 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
+        - react/install
+        - react/eslint:
+            requires:
+              - react/install
+        - react/test:
+            requires:
+              - react/install
+        - react/coverage:
+            requires:
+              - react/install
