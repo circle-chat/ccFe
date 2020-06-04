@@ -1,19 +1,20 @@
 # The Circle
+https://circle-jcg5wby7mq-uc.a.run.app
 ## The Mission
-The Circle is a lightweight online chat website that randomly matches two people from a closed group for a one-on-one chat. These groups can exist for an organization, a collective shared interest, or just about anything else. Our vision is to strengthen communities by fostering relationships between members of a circle who wouldn’t normally take the time to chat and connect with each other.
+The Circle is a lightweight online chat website that randomly matches two people from a closed group for a one-on-one chat. These groups can exist for an organization, a collective shared interest, or just about anything else. Our vision is to strengthen communities by fostering relationships between members of a circle who wouldn’t normally take the time or have the chance to connect with each other.
 The Circle is committed to privacy. Groups auto expire after a certain time frame and no private user information is ever stored.
 
 ## The Stack
 The front end of The Circle was created using JavaScript and CSS within a React library. Connections to the backend are executed using web sockets.
 
 ### React / React Router / Redux
-React is great we all love it.
+We used React to create an interactive, component-based UI. Redux and React Router were incorporated to deal with state management and routing.
 
 ### Socket.io
 Socket.io was fundamental in this app due to the design of a real-time, bi-directional, and event based communication between the client and server.
 
 ### Circle CI
-Circle CI is a very user friendly Continuous Intergration platform that uses a simple config file and is able to connect with github to make sure each Pull Request is tested prior to merging with the Production Branch
+Circle CI is a user friendly Continuous Integration platform that uses a simple config file and is able to connect with GitHub to make sure each Pull Request is tested prior to merging with the Production Branch
 
 ### Docker
 Docker made managing the different contributors' local setups painless.  while enabling quick integration of new features and bug fixes to the deployed production server.
@@ -32,10 +33,33 @@ A user may also create a group. From the main page, if they click the "Create Gr
 The Circle integrates features to easily copy group links for distribution, to eliminate or enable profanity, and to introduce new users to the application.
 
 ## The How-To
+In order to run this repository locally, start by forking and cloning the repository.
+Then you will need to download and install the docker app.
+In order to get the docker up and running, run the following commands:
+```
+docker pull iev0lv3/circle-fe:prod
+docker run -it -d -p 1337:1337 iev0lv3/circle-fe
+```
+
+If you would like to run the app in docker, you will need to change the host location within the .env file.
+
+Finally, run
+```
+yarn install
+```
+and then
+```
+yarn start
+```
+This will automatically redirect you to the landing page for The Circle.
 
 ## The Production
-
-## The Goals
+In order to set up the repository for production, run the commands below:
+```
+yarn global add serve
+yarn build
+serve <repo_name>
+```
 
 ## The Backend
 Python / Flask / Socket.io
@@ -48,6 +72,18 @@ The decision to use the Flask framework for Python came from the challenge of le
 [Kyle Barnett](https://github.com/KmBarnett "Kyle's Github")
 [Ezekiel Clark](https://github.com/Yetidancer "Zeke's Github")
 [Jordan Wallace Williams](https://github.com/iEv0lv3 "Wallace's Github")
+
+
+
+
+
+---
+
+
+
+
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
