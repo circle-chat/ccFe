@@ -3,23 +3,29 @@ import ChatForm from "./ChatForm";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
+import { addNewCode, addRoomCode } from './../../Actions';
 import uniqid from 'uniqid';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from '../../reducers';
+
+
+const testStore = createStore(rootReducer);
 
 jest.mock('uniqid')
 
- let socket = new SocketMock();
+let socket = new SocketMock();
 
- const mockSetError = jest.fn()
+const mockSetError = jest.fn()
 
-
-
-function renderChatForm() {
+function renderChatForm(filterStatus = true) {
   return render(
         <ChatForm
           socket={socket}
           roomCode={'test-code'}
           setError={mockSetError}
-          name={'alan'}
+          name={'jennyfromtheblock'}
+          filterOn={filterStatus}
         />
   )
 }
@@ -37,7 +43,35 @@ describe("<ChatForm />", () => {
     fireEvent.click(messageSend)
 
     expect(socket.emit).toHaveBeenCalled()
-    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', sender_name: "alan", room:'test-code', "id": "12345id"})
+    expect(socket.emit).toHaveBeenCalledWith('message', {message:'Test', room:'test-code', sender_name:'jennyfromtheblock', id: '12345id'})
+
+  });
+ 
+  it("User is censored when profanity is used", () => {
+    const { getByText, getByPlaceholderText } = renderChatForm()
+
+    const messageInput = getByPlaceholderText('Type a message here...')
+    const messageSend = getByText('Send Message')
+
+    fireEvent.change(messageInput, { target: { value: 'You are a shit-stained fuck-ass' } })
+    fireEvent.click(messageSend)
+
+    expect(socket.emit).toHaveBeenCalled()
+    expect(socket.emit).toHaveBeenCalledWith('message', {message:'You are a 🤬🤬🤬🤬-stained 🤬🤬🤬🤬-🤬🤬🤬', room:'test-code', sender_name:'jennyfromtheblock', id: '12345id'})
+
+  });
+
+  it("User is not censored when profanity filter is off", () => {
+    const { getByText, getByPlaceholderText } = renderChatForm(false)
+
+    const messageInput = getByPlaceholderText('Type a message here...')
+    const messageSend = getByText('Send Message')
+
+    fireEvent.change(messageInput, { target: { value: 'You are a shit-stained fuck-ass' } })
+    fireEvent.click(messageSend)
+
+    expect(socket.emit).toHaveBeenCalled()
+    expect(socket.emit).toHaveBeenCalledWith('message', {message:'You are a shit-stained fuck-ass', room:'test-code', sender_name:'jennyfromtheblock', id: '12345id'})
   });
 
   it("Error is set on blocked input", () => {
