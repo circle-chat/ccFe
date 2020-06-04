@@ -11,7 +11,9 @@ function ChatForm({ socket, setError, roomCode, name, sid, filter }) {
     e.preventDefault();
     if (message) {
 
-      socket.emit('message', { message, id: uniqid(), room: roomCode, sender_name: name })
+      const isDirtyMessage = filter.isProfane(message)
+
+      socket.emit('message', { message, id: uniqid(), room: roomCode, sender_name: name, sid: sid})
       setMessage('')
       setError('')
     } else {
