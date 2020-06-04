@@ -12,6 +12,3 @@ workflows:
       - react/test:
           requires:
             - react/install
-      - react/coverage:
-          requires:
-            - react/install
