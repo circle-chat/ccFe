@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from '../../reducers';
+import rootReducer from './../../Reducers';
 import { MemoryRouter as Router } from 'react-router-dom';
 
 

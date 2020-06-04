@@ -6,7 +6,7 @@ import { addNewCode } from './../../Actions';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from '../../reducers';
+import rootReducer from './../../Reducers';
 import { getGroup } from './../../APICalls.js'
 
 

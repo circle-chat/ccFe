@@ -17,7 +17,7 @@ export const postGroup = async ( groupName, description, rules ) => {
 }
 
 export const getGroup = async (code) => {
-  const response = await fetch(`https://circle-jcg5wby7mq-uc.a.run.app/groups`)
+  const response = await fetch(`${endPoint}/groups`)
   const data = await response.json()
 
   const group = data.find(group => group.access_code === code)
