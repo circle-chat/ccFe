@@ -30,8 +30,8 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
   }
 
   const leaveChat = () => {
-    socket.disconnect();
     socket.emit('leave_room')
+    socket.disconnect(true);
   }
 
   const handleLeave = (e) => {
