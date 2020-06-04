@@ -4,6 +4,7 @@ version: 2.1
 workflows:
   push:
     jobs:
+      working_directory: ~/ccFe
       - react/install
       - react/eslint:
           requires:
