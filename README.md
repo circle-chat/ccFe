@@ -59,9 +59,9 @@ This will automatically redirect you to the landing page for The Circle.
 ## The Production
 In order to set up the repository for production, run the commands below:
 ```
-yarn global add serve
 yarn build
-serve <repo_name>
+npm install -g serve (if you haven't)
+serve -s build
 ```
 
 ## The Backend
