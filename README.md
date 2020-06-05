@@ -46,6 +46,8 @@ Then you will need to download and install the docker app.
 
 To setup the Back-End go [here](https://github.com/circle-chat/cc-be/blob/master/README.md).
 
+Point your favorite web browser to `localhost:8080`
+
 ## The Production
 In order to set up the repository for production, run the commands below:
 ```
