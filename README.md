@@ -44,7 +44,7 @@ The Circle integrates features to easily copy group links for distribution, to e
 In order to run this repository locally, start by forking and cloning the repository.
 Then you will need to download and install the docker app.
 
-To set backend go [here](https://github.com/circle-chat/cc-be/blob/master/README.md).
+To setup the Back-End go [here](https://github.com/circle-chat/cc-be/blob/master/README.md).
 
 ## The Production
 In order to set up the repository for production, run the commands below:
