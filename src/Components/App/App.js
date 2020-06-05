@@ -35,6 +35,7 @@ function App({ grabLocalCodes }) {
     let landing = IsJoin || IsAlsoJoin ?
     'main-page' : 'not-main'
     setLocation(landing)
+// eslint-disable-next-line
   },[])
 
   history.listen((location) => {

@@ -17,7 +17,7 @@ describe("<Participant />", () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
 
   it('can display room information', () => {
-    const { getByText, debug } = renderParticipant()
+    const { getByText } = renderParticipant()
 
     const user2 = getByText('Test-User-Two')
     const groupName = getByText('Circle Code: Test-Group')

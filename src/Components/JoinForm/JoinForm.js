@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './JoinForm.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewCode, addName, leaveChat as reset } from './../../Actions';
 
@@ -43,6 +43,7 @@ function JoinForm({ codes, addNewCode, group = '', addName, created, reset, last
     if (lastPath !== '/create') {
       reset()
     }
+// eslint-disable-next-line
   },[group])
 
     return (

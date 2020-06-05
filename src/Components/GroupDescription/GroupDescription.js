@@ -46,6 +46,7 @@ const GroupDescription = ({groupCode}) => {
 
     }
     fetchGroup()
+ // eslint-disable-next-line
   },[])
 
   if (!group.name) {
