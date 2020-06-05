@@ -1,9 +1,9 @@
-const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app"
+const base = process.env.REACT_APP_BACKEND
 
 
 export const postGroup = async ( groupName, description, rules ) => {
   let formattedRules = JSON.stringify(rules)
-  const response = await fetch(`${endPoint}/groups`, {
+  const response = await fetch(`${base}/groups`, {
     method: 'POST', 
     headers: { 
       'Content-Type': 'application/json' 
@@ -17,7 +17,7 @@ export const postGroup = async ( groupName, description, rules ) => {
 }
 
 export const getGroup = async (code) => {
-  const response = await fetch(`${endPoint}/groups`)
+  const response = await fetch(`${base}/groups`)
   const data = await response.json()
 
   const group = data.find(group => group.access_code === code)

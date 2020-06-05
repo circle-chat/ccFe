@@ -18,9 +18,6 @@ function App({ grabLocalCodes }) {
   const [lastPath, setLastPath] = useState(['/'])
   const history = useHistory()
 
-
-
-
   useLayoutEffect(() => {
     const storeMyCodes = () => {
       const codes = JSON.parse(window.localStorage.getItem('codes'))
