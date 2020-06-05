@@ -3,14 +3,7 @@ import ChatForm from "./ChatForm";
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SocketMock from 'socket.io-mock';
-import { addNewCode, addRoomCode } from './../../Actions';
 import uniqid from 'uniqid';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './../../Reducers';
-
-
-const testStore = createStore(rootReducer);
 
 jest.mock('uniqid')
 

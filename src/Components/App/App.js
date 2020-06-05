@@ -18,9 +18,6 @@ function App({ grabLocalCodes }) {
   const [lastPath, setLastPath] = useState(['/'])
   const history = useHistory()
 
-
-
-
   useLayoutEffect(() => {
     const storeMyCodes = () => {
       const codes = JSON.parse(window.localStorage.getItem('codes'))
@@ -35,6 +32,7 @@ function App({ grabLocalCodes }) {
     let landing = IsJoin || IsAlsoJoin ?
     'main-page' : 'not-main'
     setLocation(landing)
+// eslint-disable-next-line
   },[])
 
   history.listen((location) => {

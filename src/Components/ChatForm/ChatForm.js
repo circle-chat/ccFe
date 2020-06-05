@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ChatForm.css';
 import uniqid from 'uniqid';
-import Filter from 'bad-words';
 
 function ChatForm({ socket, setError, roomCode, name, sid, filter }) {
   const [ message, setMessage ] = useState('');

@@ -43,13 +43,10 @@ The Circle integrates features to easily copy group links for distribution, to e
 ## The How-To
 In order to run this repository locally, start by forking and cloning the repository.
 Then you will need to download and install the docker app.
-In order to get the docker up and running, run the following commands:
-```
-docker pull iev0lv3/circle-fe:prod
-docker run -it -d -p 8081:8081 iev0lv3/circle-fe
-```
 
-Point your favorite web browser to `localhost:8081`
+To setup the Back-End go [here](https://github.com/circle-chat/cc-be/blob/master/README.md).
+
+Point your favorite web browser to `localhost:8080`
 
 ## The Production
 In order to set up the repository for production, run the commands below:

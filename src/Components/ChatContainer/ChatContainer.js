@@ -10,10 +10,10 @@ import uniqid from 'uniqid'
 import Filter from 'bad-words';
 
 
-const endPoint = "https://circle-jcg5wby7mq-uc.a.run.app"
+
 
 function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }) {
-  const socket = io.connect(`${endPoint}`);
+  const socket = io.connect(process.env.REACT_APP_BACKEND);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState('');
   const [sid, setSid] = useState('');
@@ -77,14 +77,17 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
     });
 
     scrollToBottom()
+// eslint-disable-next-line
   },[messages.length]);
 
   useEffect(() => {
     socket.on("join_room",function(roomDetails) {  
       addRoomCode(roomDetails.room)
       setRoomDetails(roomDetails);
+
       socket.emit('received', true);
     });
+// eslint-disable-next-line
   },[]);
 
 
@@ -104,6 +107,7 @@ function ChatContainer({ groupCode, roomCode, name, addRoomCode, leaveChatRoom }
       window.removeEventListener('click', handleStay)
       leaveChat()
     }
+// eslint-disable-next-line
   }, []) 
 
 
