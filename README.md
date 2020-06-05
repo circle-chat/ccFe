@@ -39,10 +39,12 @@ Then you will need to download and install the docker app.
 In order to get the docker up and running, run the following commands:
 ```
 docker pull iev0lv3/circle-fe:prod
-docker run -it -d -p 1337:1337 iev0lv3/circle-fe
+docker run -it -d -p 1337:1337 iev0lv3/circle-fe:prod
 ```
 
-If you would like to run the app in docker, you will need to change the host location within the .env file.
+If you would like to run the app outside of docker, you will need to change the REACT_APP_BACKEND location within the .env file.
+
+Create a .env.local to hold any secret/sensitive information like API keys for more information on this go [here](https://create-react-app.dev/docs/adding-custom-environment-variables/).
 
 Finally, run
 ```
