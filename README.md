@@ -1,4 +1,7 @@
 # The Circle
+
+![giphy-1](https://user-images.githubusercontent.com/56602822/83891447-ca175c80-a712-11ea-91d5-88beb2691242.gif)
+
 https://circle-fe-jcg5wby7mq-uc.a.run.app/
 ## The Mission
 The Circle is a lightweight online chat website that randomly matches two people from a closed group for a one-on-one chat. These groups can exist for an organization, a collective shared interest, or just about anything else. Our vision is to strengthen communities by fostering relationships between members of a circle who wouldn’t normally take the time or have the chance to connect with each other.
@@ -20,15 +23,19 @@ Circle CI is a user friendly Continuous Integration platform that uses a simple 
 ### Docker
 Docker made managing the different contributors' local setups painless.  while enabling quick integration of new features and bug fixes to the deployed production server.
 
-### Google Cloud Platform / CloudRun
-Google Cloud Platform and its CloudRun service was chosen for its ease of use in deploying Docker containers. It also has built in security with automatic SSL and TLS. Additionally, it allows for serverless deployment and is available to the end user very quickly.
+### Google Cloud Platform / Cloud Run
+Google Cloud Platform and its Cloud Run service was chosen for its ease of use in deploying Docker containers. It also has built in security with automatic SSL and TLS. Additionally, it allows for serverless deployment and is available to the end user very quickly.
 
-<img width="668" alt="Screen Shot 2020-06-04 at 2 22 41 PM" src="https://user-images.githubusercontent.com/10391857/83806630-0d1ff400-a66f-11ea-82a7-9b012f421631.png">
+<img width="662" alt="Screen Shot 2020-06-05 at 8 22 47 AM" src="https://user-images.githubusercontent.com/10391857/83890864-9552d780-a709-11ea-8f2d-13e08a12f416.png">
 
 ## The Function
+At The Circle a user may create a group. From the main page, if they click the "Create Group" button, they will be navigated to a page where they can enter a group "Name", "Description", and "Rules" for the page. From there they may create the group and distribute the group code for others to use.
+
+![giphy](https://user-images.githubusercontent.com/56602822/83891380-afdd7e80-a712-11ea-9c76-6235b31e2ef1.gif)
+
 The Circle allows users to join a group through the main page using a Group Code and a display Name. Then they can click the "Chat!" button to enter into a group, where they will be randomly matched with another user and placed in a chat room. At that point, the user may chat as long as they want.
 
-A user may also create a group. From the main page, if they click the "Create Group" button, they will be navigated to a page where they can enter a group "Name", "Description", and "Rules" for the page. From there they may create the group and distribute the group code for others to use.
+
 
 ## The Features
 The Circle integrates features to easily copy group links for distribution, to eliminate or enable profanity, and to introduce new users to the application.
@@ -36,32 +43,15 @@ The Circle integrates features to easily copy group links for distribution, to e
 ## The How-To
 In order to run this repository locally, start by forking and cloning the repository.
 Then you will need to download and install the docker app.
-In order to get the docker up and running, run the following commands:
-```
-docker pull iev0lv3/circle-fe:prod
-docker run -it -d -p 1337:1337 iev0lv3/circle-fe:prod
-```
 
-If you would like to run the app outside of docker, you will need to change the REACT_APP_BACKEND location within the .env file.
-
-Create a .env.local to hold any secret/sensitive information like API keys for more information on this go [here](https://create-react-app.dev/docs/adding-custom-environment-variables/).
-
-Finally, run
-```
-yarn install
-```
-and then
-```
-yarn start
-```
-This will automatically redirect you to the landing page for The Circle.
+To set backend go [here](https://github.com/circle-chat/cc-be/blob/master/README.md).
 
 ## The Production
 In order to set up the repository for production, run the commands below:
 ```
+yarn global add serve
 yarn build
-npm install -g serve (if you haven't)
-serve -s build
+serve <repo_name>
 ```
 
 ## The Backend
